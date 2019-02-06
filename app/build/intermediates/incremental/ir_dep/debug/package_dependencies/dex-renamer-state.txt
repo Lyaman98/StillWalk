@@ -1,0 +1,4 @@
+#Sun Jan 27 18:55:23 AZT 2019
+base.0=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\113
+path.0=classes.dex
+renamed.0=classes.dex
