@@ -1,4 +1,4 @@
-#Thu Feb 07 01:13:30 AZT 2019
+#Tue Feb 12 21:46:13 AZT 2019
 base.0=/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/56
 path.0=classes.dex
 renamed.0=classes.dex

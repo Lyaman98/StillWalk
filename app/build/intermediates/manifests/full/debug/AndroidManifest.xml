@@ -38,8 +38,6 @@
         </activity>
 
         <receiver android:name="com.example.user.stillwalk.helperclasses.MyReceiver" />
-
-        <service android:name="com.example.user.stillwalk.helperclasses.UpdateService" />
     </application>
 
 </manifest>

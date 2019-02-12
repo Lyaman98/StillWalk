@@ -1685,7 +1685,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
@@ -3195,8 +3195,11 @@ public final class R {
     public static final int abc_shareactionprovider_share_with_application=0x7f0b001b;
     public static final int abc_toolbar_collapse_description=0x7f0b001c;
     public static final int app_name=0x7f0b001d;
-    public static final int search_menu_title=0x7f0b001e;
-    public static final int status_bar_notification_info_overflow=0x7f0b001f;
+    public static final int compose_disabled_message1=0x7f0b001e;
+    public static final int compose_shortcut_long_label1=0x7f0b001f;
+    public static final int compose_shortcut_short_label1=0x7f0b0020;
+    public static final int search_menu_title=0x7f0b0021;
+    public static final int status_bar_notification_info_overflow=0x7f0b0022;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0c0000;
@@ -7651,7 +7654,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
@@ -12103,5 +12106,8 @@ public final class R {
      * @attr name android:inflatedId
      */
     public static final int ViewStubCompat_android_inflatedId=2;
+  }
+  public static final class xml {
+    public static final int shortcuts=0x7f0e0000;
   }
 }
