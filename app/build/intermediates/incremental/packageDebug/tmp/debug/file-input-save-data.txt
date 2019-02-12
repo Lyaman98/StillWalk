@@ -1,19 +1,7 @@
 #Internal package file, do not edit.
-#Sun Jan 27 18:55:25 AZT 2019
-1.base=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\116
-2.path=classes.dex
+#Wed Feb 06 19:57:15 AZT 2019
 0.baseType=DIRECTORY
-3.baseType=DIRECTORY
-2.base=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\115
-3.set=DEX
-2.set=DEX
-1.baseType=DIRECTORY
-3.path=classes.dex
-count=4
-1.set=DEX
+0.base=/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/56
 0.path=classes.dex
-3.base=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\117
 0.set=DEX
-0.base=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\114
-2.baseType=DIRECTORY
-1.path=classes.dex
+count=1

@@ -14,10 +14,6 @@ import com.example.user.stillwalk.R;
 public class MainPage extends AppCompatActivity {
 
 
-    private Button personalInfo;
-    private Button contacts;
-    private Button sos;
-    private Button signOut;
     public static final String MyPREFERENCES = "LoginInfo" ;
     private SharedPreferences sharedPreferences;
 
@@ -26,36 +22,30 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        personalInfo = findViewById(R.id.personal_info);
-        contacts = findViewById(R.id.contacts);
-        sos = findViewById(R.id.sos);
-        signOut = findViewById(R.id.sign_out);
+        Button personalInfo = findViewById(R.id.personal_info);
+        Button contacts = findViewById(R.id.contacts);
+        Button sos = findViewById(R.id.sos);
+        Button signOut = findViewById(R.id.sign_out);
 
         String username = getIntent().getStringExtra("username");
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
 
-        personalInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainPage.this, PersonalDataPage.class);
+        personalInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(MainPage.this, PersonalDataPage.class);
+            intent.putExtra("username",username);
+            startActivity(intent);
+        });
+        sos.setOnClickListener(v -> {
+
+            //Context – это объект, который предоставляет доступ к базовым функциям приложения:
+            // доступ к ресурсам, к файловой системе, вызов активности и т.д. Activity является подклассом Context,
+            // поэтому в коде мы можем использовать её как ИмяАктивности.this (напр. MainActivity.this), или укороченную запись this.
+            // Классы Service, Application и др. также работают с контекстом.
+
+                Intent intent = new Intent(MainPage.this, SmsPage.class);
                 intent.putExtra("username",username);
                 startActivity(intent);
-            }
-        });
-        sos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Context – это объект, который предоставляет доступ к базовым функциям приложения:
-                // доступ к ресурсам, к файловой системе, вызов активности и т.д. Activity является подклассом Context,
-                // поэтому в коде мы можем использовать её как ИмяАктивности.this (напр. MainActivity.this), или укороченную запись this.
-                // Классы Service, Application и др. также работают с контекстом.
-
-                    Intent intent = new Intent(MainPage.this, SmsPage.class);
-                    intent.putExtra("username",username);
-                    startActivity(intent);
-            }
         });
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override

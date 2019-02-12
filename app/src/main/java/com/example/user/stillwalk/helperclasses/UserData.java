@@ -134,6 +134,7 @@ public class UserData {
             ResultSet resultSet = p.executeQuery();
 
 
+
             if (resultSet.next()){
                 User user = new User();
                 ArrayList<String> contacts= new ArrayList<>();

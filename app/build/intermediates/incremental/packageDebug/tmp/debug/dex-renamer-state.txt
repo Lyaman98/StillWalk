@@ -1,13 +1,4 @@
-#Sun Jan 27 18:55:25 AZT 2019
-path.3=classes.dex
-path.2=classes.dex
-path.1=classes.dex
+#Thu Feb 07 01:13:30 AZT 2019
+base.0=/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/56
 path.0=classes.dex
-renamed.3=classes4.dex
-renamed.2=classes3.dex
-renamed.1=classes2.dex
 renamed.0=classes.dex
-base.3=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\115
-base.2=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\117
-base.1=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\114
-base.0=C\:\\Users\\User\\Desktop\\StillWalk2\\StillWalkApp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\116
