@@ -1,20 +1,16 @@
 package com.example.user.stillwalk.classes;
 
 import android.Manifest;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
@@ -26,19 +22,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
-import com.example.user.stillwalk.helperclasses.MyReceiver;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class SmsPage extends AppCompatActivity {
 
     private final static int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
     private final static int LOCATION_PERMISSION_REQUEST_CODE = 10;
+    private final static int REQUEST_READ_PHONE_STATE=1;
 
     private UserData userData;
     private User user;
@@ -58,17 +55,11 @@ public class SmsPage extends AppCompatActivity {
     private Location myLocation;
     public static final String MyPREFERENCES = "ContactsInfo";
     public SharedPreferences sharedPreferences;
-
-    MyReceiver receiver = new MyReceiver();
+    private boolean haveContacts = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-
-        registerReceiver(receiver,filter);
 
         setContentView(R.layout.send_sms);
 
@@ -93,26 +84,6 @@ public class SmsPage extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onPause() {
-        boolean screenOff = getIntent().getBooleanExtra("screen_state",false);
-
-        Toast.makeText(this,"Sending...." , Toast.LENGTH_LONG).show();
-
-        if (!screenOff){
-            sendMessage("SOS BUTTON WAS CLICKED.");
-        }
-        super.onPause();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(receiver);
-        Toast.makeText(this,"here...." , Toast.LENGTH_SHORT).show();
-
-    }
 
     private void checkLocation() {
 
@@ -120,17 +91,10 @@ public class SmsPage extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-
-
                 myLocation = location;
-                progressBar.setVisibility(View.INVISIBLE);
-                loadingText.setVisibility(View.INVISIBLE);
-                otherReasonB.setVisibility(View.VISIBLE);
-                tensionB.setVisibility(View.VISIBLE);
-                dizzinessB.setVisibility(View.VISIBLE);
-                hearAttackB.setVisibility(View.VISIBLE);
-                brokenBonesB.setVisibility(View.VISIBLE);
-
+                if (haveContacts){
+                    showButtons();
+                }
             }
 
             @Override
@@ -149,25 +113,36 @@ public class SmsPage extends AppCompatActivity {
             }
         };
 
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+        };
 
-        if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && !checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            }, LOCATION_PERMISSION_REQUEST_CODE);
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.SEND_SMS)){
 
-        } else {
-
-            if (!checkPermission(Manifest.permission.SEND_SMS)) {
-                ActivityCompat.requestPermissions(this, new String[]{
-                        Manifest.permission.SEND_SMS
-                }, SEND_SMS_PERMISSION_REQUEST_CODE);
-            }
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         }
 
     }
 
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     public void otherReasonSos(View view) {
 
@@ -198,7 +173,6 @@ public class SmsPage extends AppCompatActivity {
 
         if (!user.getContacts().isEmpty()) {
 
-            Log.i("MYTAG", "" + " ..." + user.getContacts());
 
             StringBuilder msg = new StringBuilder();
 
@@ -235,7 +209,7 @@ public class SmsPage extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(phoneNumber) && !TextUtils.isEmpty(message)) {
 
-            if (checkPermission(Manifest.permission.SEND_SMS)) {
+            if (checkPermission(Manifest.permission.SEND_SMS) && checkPermission(Manifest.permission.READ_PHONE_STATE)) {
 
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNumber, null, message, null, null);
@@ -267,12 +241,29 @@ public class SmsPage extends AppCompatActivity {
                 add(phoneNumber2);
             }});
             user.setMessage(sharedPreferences.getString("messageKey", ""));
+            haveContacts = true;
 
         } else {
-            new Thread(() -> user = userData.getContacts(username)).start();
+            new Thread(() -> {
+                user = userData.getContacts(username);
+                haveContacts = true;
+            }).start();
         }
         return user;
 
+    }
+
+    private void showButtons(){
+
+        if (user.getContacts() != null){
+            progressBar.setVisibility(View.INVISIBLE);
+            loadingText.setVisibility(View.INVISIBLE);
+            otherReasonB.setVisibility(View.VISIBLE);
+            tensionB.setVisibility(View.VISIBLE);
+            dizzinessB.setVisibility(View.VISIBLE);
+            hearAttackB.setVisibility(View.VISIBLE);
+            brokenBonesB.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -280,36 +271,14 @@ public class SmsPage extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        switch (requestCode) {
+        for (String permission : permissions){
 
-            case SEND_SMS_PERMISSION_REQUEST_CODE: {
-
-                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(SmsPage.this, "Permission denied", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            }
-            case LOCATION_PERMISSION_REQUEST_CODE: {
-
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+            if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION) && requestCode == 1){
                     if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-
-                        if (!checkPermission(Manifest.permission.SEND_SMS)) {
-                            ActivityCompat.requestPermissions(this, new String[]{
-                                    Manifest.permission.SEND_SMS
-                            }, SEND_SMS_PERMISSION_REQUEST_CODE);
-
-                        }
                         locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
                     }
-                } else {
-                    Toast.makeText(SmsPage.this, "Permission denied", Toast.LENGTH_SHORT).show();
-
-                }
                 break;
             }
-
         }
     }
 

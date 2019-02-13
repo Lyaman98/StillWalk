@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">StillWalk</string>
-    <string name="compose_shortcut_short_label1">Screen</string>
-    <string name="compose_shortcut_long_label1">Screen</string>
-    <string name="compose_disabled_message1">Screen</string>
-
 </resources>

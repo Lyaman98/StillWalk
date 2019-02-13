@@ -890,11 +890,8 @@ int string abc_shareactionprovider_share_with 0x7f0b001a
 int string abc_shareactionprovider_share_with_application 0x7f0b001b
 int string abc_toolbar_collapse_description 0x7f0b001c
 int string app_name 0x7f0b001d
-int string compose_disabled_message1 0x7f0b001e
-int string compose_shortcut_long_label1 0x7f0b001f
-int string compose_shortcut_short_label1 0x7f0b0020
-int string search_menu_title 0x7f0b0021
-int string status_bar_notification_info_overflow 0x7f0b0022
+int string search_menu_title 0x7f0b001e
+int string status_bar_notification_info_overflow 0x7f0b001f
 int style AlertDialog_AppCompat 0x7f0c0000
 int style AlertDialog_AppCompat_Light 0x7f0c0001
 int style Animation_AppCompat_Dialog 0x7f0c0002
@@ -1795,4 +1792,3 @@ int[] styleable ViewStubCompat { 0x010100d0, 0x010100f2, 0x010100f3 }
 int styleable ViewStubCompat_android_id 0
 int styleable ViewStubCompat_android_layout 1
 int styleable ViewStubCompat_android_inflatedId 2
-int xml shortcuts 0x7f0e0000
