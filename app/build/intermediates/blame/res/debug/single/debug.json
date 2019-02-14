@@ -188,6 +188,10 @@
         "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8c06e690d9831b77b5f295a4fab7b9b3/res/drawable-xxxhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
+        "merged": "/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/xml_shortcuts.xml.flat",
+        "source": "/Users/macbookpro/Desktop/StillWalkApp/app/src/main/res/xml/shortcuts.xml"
+    },
+    {
         "merged": "/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view.xml.flat",
         "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8c06e690d9831b77b5f295a4fab7b9b3/res/layout/abc_activity_chooser_view.xml"
     },
@@ -714,6 +718,10 @@
     {
         "merged": "/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
         "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/8c06e690d9831b77b5f295a4fab7b9b3/res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable_icon.png.flat",
+        "source": "/Users/macbookpro/Desktop/StillWalkApp/app/src/main/res/drawable/icon.png"
     },
     {
         "merged": "/Users/macbookpro/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",

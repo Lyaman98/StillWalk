@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
 
 public class LoginPage extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class LoginPage extends AppCompatActivity {
                 new Thread(() -> {
 
 
-                    boolean check = userData.checkUser(usernameText, passwordText);
+                    boolean check = userData.checkUser(usernameText, HashingUtils.hashPassowrd(passwordText));
 
                     handler.post(()->{
 

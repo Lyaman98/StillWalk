@@ -33,17 +33,12 @@ import java.util.Arrays;
 
 public class SmsPage extends AppCompatActivity {
 
-    private final static int SEND_SMS_PERMISSION_REQUEST_CODE = 111;
-    private final static int LOCATION_PERMISSION_REQUEST_CODE = 10;
-    private final static int REQUEST_READ_PHONE_STATE=1;
-
     private UserData userData;
     private User user;
 
     private Button otherReasonB;
     private Button tensionB;
     private Button dizzinessB;
-    private Button brokenBonesB;
     private Button hearAttackB;
     public TextView loadingText;
     public ProgressBar progressBar;
@@ -54,6 +49,8 @@ public class SmsPage extends AppCompatActivity {
     private LocationManager locationManager;
     private Location myLocation;
     public static final String MyPREFERENCES = "ContactsInfo";
+    public static final String USERNAME_PREFERENCE = "LoginInfo";
+
     public SharedPreferences sharedPreferences;
     private boolean haveContacts = false;
 
@@ -66,7 +63,6 @@ public class SmsPage extends AppCompatActivity {
         otherReasonB = findViewById(R.id.other_reason);
         tensionB = findViewById(R.id.tension_send);
         dizzinessB = findViewById(R.id.dizziness_send);
-        brokenBonesB = findViewById(R.id.broken_bones_send);
         hearAttackB = findViewById(R.id.heart_attack_send);
 
         progressBar = findViewById(R.id.loadingPanel);
@@ -75,9 +71,9 @@ public class SmsPage extends AppCompatActivity {
         checkLocation();
 
         userData = new UserData();
-        username = getIntent().getStringExtra("username");
+        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE,MODE_PRIVATE);
+        username = sharedPreferences.getString("usernameKey","");
         user = new User();
-
         getUser();
 
 
@@ -163,11 +159,6 @@ public class SmsPage extends AppCompatActivity {
 
     }
 
-    public void brokenBonesSos(View v) {
-        sendMessage(" BROKEN BONES SOS BUTTON WAS CLICKED.");
-
-    }
-
 
     public void sendMessage(String s) {
 
@@ -243,10 +234,15 @@ public class SmsPage extends AppCompatActivity {
             user.setMessage(sharedPreferences.getString("messageKey", ""));
             haveContacts = true;
 
+
         } else {
             new Thread(() -> {
-                user = userData.getContacts(username);
-                haveContacts = true;
+
+                if (userData.getContacts(username) != null) {
+                    user = userData.getContacts(username);
+                    haveContacts = true;
+
+                }
             }).start();
         }
         return user;
@@ -262,7 +258,6 @@ public class SmsPage extends AppCompatActivity {
             tensionB.setVisibility(View.VISIBLE);
             dizzinessB.setVisibility(View.VISIBLE);
             hearAttackB.setVisibility(View.VISIBLE);
-            brokenBonesB.setVisibility(View.VISIBLE);
         }
     }
 

@@ -139,7 +139,6 @@ public class UserData {
                 User user = new User();
                 ArrayList<String> contacts= new ArrayList<>();
 
-
                 contacts.add(resultSet.getString(1));
                 contacts.add(resultSet.getString(2));
 

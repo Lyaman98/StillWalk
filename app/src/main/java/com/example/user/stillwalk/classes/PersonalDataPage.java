@@ -33,6 +33,8 @@ public class PersonalDataPage extends AppCompatActivity {
     private Handler handler;
     private SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "PersonalInfo" ;
+    public static final String USERNAME_PREFERENCES = "LoginInfo" ;
+
 
     String username;
 
@@ -50,7 +52,8 @@ public class PersonalDataPage extends AppCompatActivity {
         age = findViewById(R.id.age);
         handler = new Handler();
 
-        username = getIntent().getStringExtra("username");
+        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCES,MODE_PRIVATE);
+        username = sharedPreferences.getString("usernameKey","");
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
         user = new User();

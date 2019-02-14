@@ -133,19 +133,5 @@
         android:textStyle="bold"
         android:visibility="invisible" />
 
-    <Button
-        android:id="@+id/broken_bones_send"
-        android:layout_width="161dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="116dp"
-        android:background="@drawable/button_background"
-        android:onClick="brokenBonesSos"
-        android:text="Broken Bones"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:visibility="invisible" />
-
 
 </RelativeLayout>

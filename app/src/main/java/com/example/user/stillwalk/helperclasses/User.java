@@ -79,4 +79,18 @@ public class User {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", personalInfo='" + personalInfo + '\'' +
+                ", id=" + id +
+                ", username='" + username + '\'' +
+                ", contacts=" + contacts +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

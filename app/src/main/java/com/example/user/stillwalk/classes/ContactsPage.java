@@ -28,6 +28,7 @@ public class ContactsPage extends AppCompatActivity {
     private EditText message;
     private String username;
     public static final String MyPREFERENCES = "ContactsInfo" ;
+    public static final String USERNAME_PREFERENCE = "LoginInfo" ;
     private SharedPreferences sharedPreferences;
 
 
@@ -41,7 +42,8 @@ public class ContactsPage extends AppCompatActivity {
         phoneNumber2 = findViewById(R.id.phone2_id);
         message = findViewById(R.id.messsage_id);
 
-        username = getIntent().getStringExtra("username");
+        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE,MODE_PRIVATE);
+        username = sharedPreferences.getString("usernameKey","");
         userData = new UserData();
         handler = new Handler(Looper.getMainLooper());
 

@@ -8,7 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
+import com.example.user.stillwalk.helperclasses.Validation;
 
 
 public class Register extends AppCompatActivity {
@@ -35,23 +37,25 @@ public class Register extends AppCompatActivity {
         String username = userName.getText().toString();
         String pass = password.getText().toString();
 
-        new Thread(()->{
-
-            boolean check = userData.registerUser(username,pass);
-
-            handler.post(()->{
-
-                if (check){
-                    Toast.makeText(this,"User registered",Toast.LENGTH_LONG).show();
+        if (!Validation.validateEmail(username)){
+            Toast.makeText(this,"Incorrect email",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!Validation.validatePassword(pass)){
+            Toast.makeText(this,"Password must be more than 5 characters",Toast.LENGTH_LONG).show();
+            return;
+        }
+        new Thread(() -> {
+            boolean check = userData.registerUser(username, HashingUtils.hashPassowrd(pass));
+            handler.post(() -> {
+                if (check) {
+                    Toast.makeText(this, "User registered", Toast.LENGTH_LONG).show();
 
                 }else {
-                    Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(this, "User already exists", Toast.LENGTH_LONG).show();
                 }
-
-
             });
-
         }).start();
+
     }
 }
