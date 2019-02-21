@@ -2,6 +2,7 @@ package com.example.user.stillwalk.classes;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -187,6 +188,9 @@ public class SmsPage extends AppCompatActivity {
             }
             if (sendMessage(user.getContacts().get(1), msg.toString())) {
                 Toast.makeText(SmsPage.this, "send successfully", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this,SosPage.class);
+                startActivity(intent);
 
             } else {
                 Toast.makeText(SmsPage.this, "error", Toast.LENGTH_SHORT).show();

@@ -65,10 +65,6 @@ public class ContactsPage extends AppCompatActivity {
             new Thread(() -> {
                 user = userData.getContacts(username);
                 handler.post(() -> {
-
-                    // Code here will run in UI thread
-                    //Each Handler instance is associated with a single thread and that thread's message queue.
-                    // When you create a new Handler, it is bound to the thread / message queue of the thread that is creating it
                     ArrayList<String> contacts = user.getContacts();
                     phoneNumber1.setText(contacts.get(0));
                     phoneNumber2.setText(contacts.get(1));

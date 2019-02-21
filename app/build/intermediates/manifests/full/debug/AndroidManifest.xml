@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.user.stillwalk.classes.SosPage" />
         <activity android:name="com.example.user.stillwalk.classes.PersonalDataPage" />
         <activity android:name="com.example.user.stillwalk.classes.ContactsPage" />
         <activity android:name="com.example.user.stillwalk.classes.SmsPage" />
