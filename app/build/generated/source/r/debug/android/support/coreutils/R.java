@@ -88,8 +88,8 @@ public final class R {
         public static final int tag_transition_group = 0x7f070094;
         public static final int text = 0x7f070096;
         public static final int text2 = 0x7f070097;
-        public static final int time = 0x7f0700a1;
-        public static final int title = 0x7f0700a2;
+        public static final int time = 0x7f07009b;
+        public static final int title = 0x7f07009c;
     }
     public static final class integer {
         public static final int status_bar_notification_info_maxnum = 0x7f080004;
@@ -103,7 +103,7 @@ public final class R {
         public static final int notification_template_part_time = 0x7f090023;
     }
     public static final class string {
-        public static final int status_bar_notification_info_overflow = 0x7f0c001f;
+        public static final int status_bar_notification_info_overflow = 0x7f0c0020;
     }
     public static final class style {
         public static final int TextAppearance_Compat_Notification = 0x7f0d00e7;

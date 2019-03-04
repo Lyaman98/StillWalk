@@ -1685,7 +1685,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
@@ -3094,25 +3094,19 @@ public final class R {
     public static final int textSpacerNoButtons=0x7f070098;
     public static final int textSpacerNoTitle=0x7f070099;
     public static final int textView=0x7f07009a;
-    public static final int textView2=0x7f07009b;
-    public static final int textView3=0x7f07009c;
-    public static final int textView4=0x7f07009d;
-    public static final int textView5=0x7f07009e;
-    public static final int textView6=0x7f07009f;
-    public static final int textView7=0x7f0700a0;
-    public static final int time=0x7f0700a1;
-    public static final int title=0x7f0700a2;
-    public static final int titleDividerNoCustom=0x7f0700a3;
-    public static final int title_template=0x7f0700a4;
-    public static final int top=0x7f0700a5;
-    public static final int topPanel=0x7f0700a6;
-    public static final int uniform=0x7f0700a7;
-    public static final int up=0x7f0700a8;
-    public static final int useLogo=0x7f0700a9;
-    public static final int username=0x7f0700aa;
-    public static final int withText=0x7f0700ab;
-    public static final int wrap=0x7f0700ac;
-    public static final int wrap_content=0x7f0700ad;
+    public static final int time=0x7f07009b;
+    public static final int title=0x7f07009c;
+    public static final int titleDividerNoCustom=0x7f07009d;
+    public static final int title_template=0x7f07009e;
+    public static final int top=0x7f07009f;
+    public static final int topPanel=0x7f0700a0;
+    public static final int uniform=0x7f0700a1;
+    public static final int up=0x7f0700a2;
+    public static final int useLogo=0x7f0700a3;
+    public static final int username=0x7f0700a4;
+    public static final int withText=0x7f0700a5;
+    public static final int wrap=0x7f0700a6;
+    public static final int wrap_content=0x7f0700a7;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f080000;
@@ -3206,9 +3200,10 @@ public final class R {
     public static final int abc_shareactionprovider_share_with_application=0x7f0c001b;
     public static final int abc_toolbar_collapse_description=0x7f0c001c;
     public static final int app_name=0x7f0c001d;
-    public static final int search_menu_title=0x7f0c001e;
-    public static final int status_bar_notification_info_overflow=0x7f0c001f;
-    public static final int textview=0x7f0c0020;
+    public static final int firstName=0x7f0c001e;
+    public static final int search_menu_title=0x7f0c001f;
+    public static final int status_bar_notification_info_overflow=0x7f0c0020;
+    public static final int textview=0x7f0c0021;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0d0000;
@@ -7663,7 +7658,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>

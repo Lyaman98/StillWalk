@@ -686,15 +686,15 @@ public final class R {
         public static final int text2 = 0x7f070097;
         public static final int textSpacerNoButtons = 0x7f070098;
         public static final int textSpacerNoTitle = 0x7f070099;
-        public static final int time = 0x7f0700a1;
-        public static final int title = 0x7f0700a2;
-        public static final int titleDividerNoCustom = 0x7f0700a3;
-        public static final int title_template = 0x7f0700a4;
-        public static final int top = 0x7f0700a5;
-        public static final int topPanel = 0x7f0700a6;
-        public static final int uniform = 0x7f0700a7;
-        public static final int up = 0x7f0700a8;
-        public static final int wrap_content = 0x7f0700ad;
+        public static final int time = 0x7f07009b;
+        public static final int title = 0x7f07009c;
+        public static final int titleDividerNoCustom = 0x7f07009d;
+        public static final int title_template = 0x7f07009e;
+        public static final int top = 0x7f07009f;
+        public static final int topPanel = 0x7f0700a0;
+        public static final int uniform = 0x7f0700a1;
+        public static final int up = 0x7f0700a2;
+        public static final int wrap_content = 0x7f0700a7;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f080000;
@@ -772,8 +772,8 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f0c001a;
         public static final int abc_shareactionprovider_share_with_application = 0x7f0c001b;
         public static final int abc_toolbar_collapse_description = 0x7f0c001c;
-        public static final int search_menu_title = 0x7f0c001e;
-        public static final int status_bar_notification_info_overflow = 0x7f0c001f;
+        public static final int search_menu_title = 0x7f0c001f;
+        public static final int status_bar_notification_info_overflow = 0x7f0c0020;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0d0000;

@@ -1,71 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/red"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/red">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="194dp"
-        android:text="First Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="150dp"
+        android:textSize="50dp"
+        android:layout_marginTop="50dp"
+        android:text="SOS" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="188dp"
-        android:layout_marginBottom="524dp"
-        android:text="Last Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:textSize="25dp"
+        android:layout_marginTop="259dp"
+        android:text="First Name" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="357dp"
-        android:layout_height="217dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="468dp"
-        android:text="Message"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:id="@+id/firstName"
+        android:layout_width="150dp"
+        android:textSize="25dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="216dp"
-        android:text="age"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="259dp"
+       />
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
-        android:layout_marginEnd="192dp"
-        android:text="blood type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="150dp"
+        android:textSize="25dp"
+
+        android:text="Last Name" />
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
+        android:id="@+id/lastName"
+        android:layout_width="292dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="380dp"
-        android:text="Contact"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="230dp"
+        android:textSize="25dp"
+        android:hint="Enter your phone number"
+        android:inputType="phone" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="354dp"
+        android:textSize="25dp"
+        android:text="Personal Info" />
+
+    <TextView
+        android:id="@+id/personal-info"
+        android:layout_width="292dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="354dp"
+        android:textSize="25dp"
+        android:layout_marginStart="230dp"
+        android:hint="Enter your phone number" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="454dp"
+        android:textSize="25dp"
+        android:text="age" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="292dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="25dp"
+        android:layout_marginTop="454dp"
+        android:layout_marginStart="230dp"
+        android:hint="Enter your phone number"
+        android:inputType="phone" />
+
+
+</RelativeLayout>
