@@ -25,21 +25,18 @@
         <activity android:name=".classes.PersonalDataPage"/>
         <activity android:name=".classes.ContactsPage"/>
         <activity android:name=".classes.SmsPage"/>
-        <activity android:name=".classes.MainPage"/>
         <activity android:name=".classes.Register"/>
+        <activity android:name=".classes.MainPage"/>
+        <service android:name=".helperclasses.GetLocationService" android:exported="false" />
+
         <activity android:name=".classes.LoginPage">
-
-
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            </activity>
+        <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
 
-            <meta-data android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-
-        </activity>
     </application>
 
 </manifest>

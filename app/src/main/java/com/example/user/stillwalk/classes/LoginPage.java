@@ -2,6 +2,7 @@ package com.example.user.stillwalk.classes;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.GetLocationService;
 import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
+
+import org.sqlite.SQLiteDataSource;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -25,7 +29,7 @@ public class LoginPage extends AppCompatActivity {
     private String usernameText;
     public static final String MyPREFERENCES = "LoginInfo" ;
     private SharedPreferences sharedPreferences;
-
+    private SQLiteDatabase sqLiteDatabase;
 
 
     @Override
@@ -50,6 +54,8 @@ public class LoginPage extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         assert inputMethodManager != null;
         inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
+
+
     }
 
     public void registerClick(View view){
@@ -63,6 +69,7 @@ public class LoginPage extends AppCompatActivity {
             String passwordText = password.getText().toString();
 
             if (!TextUtils.isEmpty(usernameText) && !TextUtils.isEmpty(passwordText)) {
+
 
                 new Thread(() -> {
 

@@ -1,6 +1,7 @@
 package com.example.user.stillwalk.classes;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +35,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -173,14 +176,14 @@ public class SmsPage extends AppCompatActivity {
 
 
             StringBuilder msg = new StringBuilder();
+            msg.append(s);
 
             if (!TextUtils.isEmpty(user.getMessage())) {
                 msg.append(user.getMessage());
                 msg.append(".");
             }
 
-            msg.append(s);
-            msg.append(" The exact location is : ");
+            msg.append("My location : ");
 
             try {
 
@@ -192,9 +195,6 @@ public class SmsPage extends AppCompatActivity {
                 if (addressList != null && addressList.size() > 0){
                     msg.append("\n");
                     msg.append(addressList.get(0).getAddressLine(0));
-
-                    Log.i("LOCATION " , addressList.get(0).toString());
-
                 }
 
 
@@ -208,7 +208,7 @@ public class SmsPage extends AppCompatActivity {
 
             if (sendMessage(user.getContacts().get(0), msg.toString())) {
 
-                Toast.makeText(SmsPage.this, "send successfully to contact 1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SmsPage.this, "send successfully to contact1", Toast.LENGTH_SHORT).show();
             }
             if (sendMessage(user.getContacts().get(1), msg.toString())) {
                 Toast.makeText(SmsPage.this, "send successfully to contact2", Toast.LENGTH_SHORT).show();
@@ -217,6 +217,9 @@ public class SmsPage extends AppCompatActivity {
                 Toast.makeText(SmsPage.this, "error", Toast.LENGTH_SHORT).show();
 
             }
+
+            Intent sosPageIntent = new Intent(SmsPage.this,SosPage.class);
+            startActivity(sosPageIntent);
         }
     }
 
@@ -228,8 +231,11 @@ public class SmsPage extends AppCompatActivity {
             if (checkPermission(Manifest.permission.SEND_SMS) && checkPermission(Manifest.permission.READ_PHONE_STATE)) {
 
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-                return true;
+                ArrayList<String> msgList = smsManager.divideMessage(message);
+
+                smsManager.sendMultipartTextMessage(phoneNumber, null,msgList, null, null);
+
+             return true;
             } else {
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
 
