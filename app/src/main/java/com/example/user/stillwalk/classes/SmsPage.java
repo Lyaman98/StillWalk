@@ -213,9 +213,6 @@ public class SmsPage extends AppCompatActivity {
             if (sendMessage(user.getContacts().get(1), msg.toString())) {
                 Toast.makeText(SmsPage.this, "send successfully to contact2", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(this,SosPage.class);
-                startActivity(intent);
-
             } else {
                 Toast.makeText(SmsPage.this, "error", Toast.LENGTH_SHORT).show();
 
