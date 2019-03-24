@@ -1,4 +1,4 @@
-#Tue Mar 05 01:51:13 AZT 2019
-base.0=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/18
+#Sun Mar 24 23:07:12 AZT 2019
+base.0=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

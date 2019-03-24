@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class UserData {
 
-    private String url = "jdbc:mysql://35.241.147.40:3306/users?";
-    private String username = "lyaman";
-    private String password = "allingoodmood";
+    private String url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2284809?";
+    private String username = "sql2284809";
+    private String password = "sU8!aY8*";
 
     public UserData() {
 

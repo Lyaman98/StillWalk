@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -46,6 +47,9 @@ public class LoginPage extends AppCompatActivity {
             this.startActivity(intent);
         }
 
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        assert inputMethodManager != null;
+        inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
     }
 
     public void registerClick(View view){

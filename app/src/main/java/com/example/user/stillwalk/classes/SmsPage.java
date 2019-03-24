@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -26,10 +29,13 @@ import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 
 public class SmsPage extends AppCompatActivity {
@@ -92,6 +98,7 @@ public class SmsPage extends AppCompatActivity {
                 if (haveContacts){
                     showButtons();
                 }
+
             }
 
             @Override
@@ -115,10 +122,9 @@ public class SmsPage extends AppCompatActivity {
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
         };
 
-        if(!hasPermissions(this, PERMISSIONS)){
+       if(!hasPermissions(this, PERMISSIONS)){
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.SEND_SMS)){
@@ -177,17 +183,35 @@ public class SmsPage extends AppCompatActivity {
             msg.append(" The exact location is : ");
 
             try {
+
                 String googleMaps = "https://www.google.com/maps/place/";
                 msg.append(new URL(googleMaps + myLocation.getLatitude() + "," + myLocation.getLongitude()));
+                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                List<Address> addressList = geocoder.getFromLocation(myLocation.getLatitude(),myLocation.getLongitude(),1);
+
+                if (addressList != null && addressList.size() > 0){
+                    msg.append("\n");
+                    msg.append(addressList.get(0).getAddressLine(0));
+
+                    Log.i("LOCATION " , addressList.get(0).toString());
+
+                }
+
+
+
             } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
+
             if (sendMessage(user.getContacts().get(0), msg.toString())) {
-                Toast.makeText(SmsPage.this, "send successfully", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(SmsPage.this, "send successfully to contact 1", Toast.LENGTH_SHORT).show();
             }
             if (sendMessage(user.getContacts().get(1), msg.toString())) {
-                Toast.makeText(SmsPage.this, "send successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SmsPage.this, "send successfully to contact2", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this,SosPage.class);
                 startActivity(intent);
@@ -273,7 +297,7 @@ public class SmsPage extends AppCompatActivity {
         for (String permission : permissions){
 
             if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION) && requestCode == 1){
-                    if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                         locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
                     }
                 break;
