@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Mar 25 13:08:56 AZT 2019
+0.baseType=DIRECTORY
+0.base=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/0
+0.path=classes.dex
+0.set=DEX
+count=1
