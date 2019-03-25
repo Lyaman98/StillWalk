@@ -1,15 +1,18 @@
 package com.example.user.stillwalk.helperclasses;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 public class GetLocationService extends Service {
@@ -18,6 +21,8 @@ public class GetLocationService extends Service {
     public Context context = this;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private DatabaseHelper databaseHelper;
+    private SharedPreferences sharedPreferences;
 
 
     @Nullable
@@ -28,13 +33,17 @@ public class GetLocationService extends Service {
 
     @Override
     public void onCreate() {
+
+        sharedPreferences = getSharedPreferences("LoginInfo",MODE_PRIVATE);
+        String username = sharedPreferences.getString("usernameKey","");
+        databaseHelper = new DatabaseHelper(this);
         locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-//                Toast.makeText(context,location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(context,location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+                databaseHelper.updateLocation(username,location.getLatitude(),location.getLongitude());
             }
 
             @Override
@@ -47,7 +56,11 @@ public class GetLocationService extends Service {
 
         };
 
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,0,locationListener);
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.SEND_SMS)){
+
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, locationListener);
+        }
 
 
     }
@@ -64,4 +77,9 @@ public class GetLocationService extends Service {
     }
 
 
+    public boolean checkPermission(String permission) {
+        int check = ContextCompat.checkSelfPermission(this, permission);
+
+        return check == PackageManager.PERMISSION_GRANTED;
+    }
 }

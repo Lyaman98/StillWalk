@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
 
@@ -40,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+//TODO : remove phone permission
 
 public class SmsPage extends AppCompatActivity {
 
@@ -63,6 +65,7 @@ public class SmsPage extends AppCompatActivity {
 
     public SharedPreferences sharedPreferences;
     private boolean haveContacts = false;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +77,30 @@ public class SmsPage extends AppCompatActivity {
         tensionB = findViewById(R.id.tension_send);
         dizzinessB = findViewById(R.id.dizziness_send);
         hearAttackB = findViewById(R.id.heart_attack_send);
-
         progressBar = findViewById(R.id.loadingPanel);
         loadingText = findViewById(R.id.loading_textView);
 
-        checkLocation();
+        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
+        username = sharedPreferences.getString("usernameKey","");
+        databaseHelper = new DatabaseHelper(this);
+        myLocation = new Location("");
+        user = databaseHelper.getUserByUsername(username);
+
+
+        ArrayList<String> location = databaseHelper.getLocation(username);
+
+        if (location == null){
+            checkLocation();
+        }else {
+            myLocation.setLatitude(Double.valueOf(location.get(0)));
+            myLocation.setLongitude(Double.valueOf(location.get(1)));
+            showButtons();
+
+        }
 
         userData = new UserData();
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE,MODE_PRIVATE);
         username = sharedPreferences.getString("usernameKey","");
-        user = new User();
         getUser();
 
 
@@ -150,22 +167,9 @@ public class SmsPage extends AppCompatActivity {
         return true;
     }
 
-    public void otherReasonSos(View view) {
 
-        sendMessage("SOS BUTTON WAS CLICKED.");
-    }
-
-    public void tensionSos(View view) {
-        sendMessage(" TENSION SOS BUTTON WAS CLICKED.");
-    }
-
-    public void heartAttackSos(View v) {
-        sendMessage(" HEART ATTACK SOS BUTTON WAS CLICKED.");
-
-    }
-
-    public void dizzinessSos(View v) {
-        sendMessage(" DIZZINESS SOS BUTTON WAS CLICKED.");
+    public void sosButtonPressed(View v) {
+        sendMessage(v.getTag().toString() + " SOS button was clicked, ");
 
     }
 
@@ -183,7 +187,7 @@ public class SmsPage extends AppCompatActivity {
                 msg.append(".");
             }
 
-            msg.append("My location : ");
+            msg.append(" My location : ");
 
             try {
 
@@ -193,7 +197,7 @@ public class SmsPage extends AppCompatActivity {
                 List<Address> addressList = geocoder.getFromLocation(myLocation.getLatitude(),myLocation.getLongitude(),1);
 
                 if (addressList != null && addressList.size() > 0){
-                    msg.append("\n");
+                    msg.append(" , ");
                     msg.append(addressList.get(0).getAddressLine(0));
                 }
 
@@ -218,6 +222,7 @@ public class SmsPage extends AppCompatActivity {
 
             }
 
+            System.out.println(msg);
             Intent sosPageIntent = new Intent(SmsPage.this,SosPage.class);
             startActivity(sosPageIntent);
         }
@@ -249,20 +254,16 @@ public class SmsPage extends AppCompatActivity {
 
     public User getUser() {
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        if (user != null && user.getUsername() != null && user.getContacts().get(0) != null) {
 
-
-        if (!TextUtils.isEmpty(sharedPreferences.getString("phoneNumb1Key", ""))
-                && sharedPreferences.getString("usernameKey", "").equals(username)) {
-
-            String phoneNumber1 = sharedPreferences.getString("phoneNumb1Key", "");
-            String phoneNumber2 = sharedPreferences.getString("phoneNumb2Key", "");
+            String phoneNumber1 = user.getContacts().get(0);
+            String phoneNumber2 = user.getContacts().get(1);
 
             user.setContacts(new ArrayList<String>() {{
                 add(phoneNumber1);
                 add(phoneNumber2);
             }});
-            user.setMessage(sharedPreferences.getString("messageKey", ""));
+            user.setMessage(user.getMessage());
             haveContacts = true;
 
 

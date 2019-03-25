@@ -71,9 +71,6 @@ public class LoginPage extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(usernameText) && !TextUtils.isEmpty(passwordText)) {
 
-                System.out.println(DatabaseHelper.DATABASE_VERSION);
-                databaseHelper = new DatabaseHelper(this);
-                databaseHelper.insertUsername(usernameText);
 
                 new Thread(() -> {
 
@@ -86,6 +83,10 @@ public class LoginPage extends AppCompatActivity {
                             Intent intent = new Intent(this, MainPage.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("username", usernameText);
+                            databaseHelper = new DatabaseHelper(this);
+                            databaseHelper.insertUsername(usernameText);
+
+
                             saveDataToInternalStorage();
                             this.startActivity(intent);
                         } else {

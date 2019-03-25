@@ -51,7 +51,7 @@ public class ContactsPage extends AppCompatActivity {
 
         user = databaseHelper.getUserByUsername(username);
 
-        if (user != null && user.getUsername() != null && user.getContacts().size() > 0){
+        if (user != null && user.getUsername() != null && user.getContacts().get(0) != null){
 
             phoneNumber1.setText(user.getContacts().get(0));
             phoneNumber2.setText(user.getContacts().get(1));

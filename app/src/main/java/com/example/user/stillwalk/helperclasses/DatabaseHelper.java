@@ -13,8 +13,9 @@ import java.util.Arrays;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "users.db";
-    public static  int DATABASE_VERSION = 2;
+    public static  int DATABASE_VERSION = 6;
     public static final String TABLE_NAME = "userdata";
+    public static final String TABLE_NAME2 = "userlocation";
     public static final String COL_2 = "username";
     public static final String COL_3 = "age";
     public static final String COL_4 = "firstName";
@@ -23,8 +24,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_7 = "contact1";
     public static final String COL_8 = "contact2";
     public static final String COL_9 = "message";
+    public static final String COL_10 = "latitude";
+    public static final String COL_11 = "longitude";
 
-    public static final String CREATE_TABLE = "create table userdata(\n" +
+
+    private static final String CREATE_TABLE = "create table userdata(\n" +
             "\tusername varchar(50) primary key unique ,\n" +
             "    firstName varchar(256),\n" +
             "    lastName varchar(256),\n" +
@@ -35,9 +39,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "    age int\n" +
             "    );";
 
+    private static final String CREATE_TABLE2 = "create table userlocation(\n" +
+            "    username varchar(256) primary key ,\n" +
+            "    latitude text,\n" +
+            "    longitude text\n" +
+            "    );";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
 
@@ -50,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         User user = null;
 
-        if (cursor != null){
+        if (cursor.moveToFirst()){
             cursor.moveToFirst();
 
             ArrayList<String> contacts = new ArrayList<>(Arrays.asList(
@@ -77,6 +87,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public  ArrayList<String> getLocation(String username){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME2, new String[]{COL_10,COL_11},
+                COL_2  + "=?", new String[]{username},null,null,null);
+
+        ArrayList<String> location = null;
+
+        if (cursor.moveToFirst()){
+            location = new ArrayList<>(Arrays.asList(
+                    cursor.getString(cursor.getColumnIndex(COL_10)),
+                    cursor.getString(cursor.getColumnIndex(COL_11))
+            ));
+        }
+        return location;
+
+    }
+
+
     public void insertUsername(String usernameValue) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues username = new ContentValues();
@@ -85,6 +115,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if ( getUserByUsername(usernameValue) == null) {
 
             db.insert(TABLE_NAME, null, username);
+        }
+
+        if (getLocation(usernameValue) == null){
+            db.insert(TABLE_NAME2, null, username);
         }
 
     }
@@ -114,14 +148,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void updateLocation(String username,Double latitude, Double longitude){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("update  " + TABLE_NAME2 + " set " +
+                COL_10 + " = '" + Double.toString(latitude) + "'," +
+                COL_11 + " = '" + Double.toString(longitude) + "' " +
+                "where username = '" + username + "'");
+
+    }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_TABLE);
+        sqLiteDatabase.execSQL(CREATE_TABLE2);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        System.out.println("DELETING ");
         sqLiteDatabase.execSQL("drop table if exists " + TABLE_NAME);
+        sqLiteDatabase.execSQL("drop table if exists " + TABLE_NAME2);
+
     }
 }
