@@ -16,63 +16,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/personal-info"
-        android:layout_width="192dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
-        android:background="@drawable/button_background"
-        android:text="Personal Information"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="77dp" />
-
-    <Button
-        android:id="@+id/contacts"
-        android:layout_width="192dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="248dp"
-        android:textColor="#fff"
-        android:background="@drawable/button_background"
-        android:text="Contacts"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="163dp" />
-
-    <Button
-        android:id="@+id/sos"
-        android:layout_width="191dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="191dp"
-        android:background="@drawable/button_background"
-        android:text="SOS"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="258dp" />
-
-    <Button
-        android:id="@+id/sign_out"
-        android:layout_width="191dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="114dp"
-        android:background="@drawable/button_background"
-        android:text="Sign Out"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="258dp" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="63dp"
@@ -90,6 +33,73 @@
             android:text="STILL WALK"
             android:textColor="#fff"
             android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="266dp"
+        android:layout_height="386dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="123dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/personal-info"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/button_background"
+            android:text="Personal Information"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="77dp" />
+
+        <Button
+            android:id="@+id/contacts"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/button_background"
+            android:text="Contacts"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="163dp" />
+
+        <Button
+            android:id="@+id/sos"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/button_background"
+            android:text="SOS"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="258dp" />
+
+        <Button
+            android:id="@+id/sign_out"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/button_background"
+            android:text="Sign Out"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="258dp" />
 
     </LinearLayout>
 

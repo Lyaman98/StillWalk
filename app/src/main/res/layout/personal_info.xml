@@ -29,66 +29,6 @@
             android:textSize="20dp" />
     </LinearLayout>
 
-    <EditText
-
-        android:id="@+id/firstName"
-        android:layout_width="305dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="114dp"
-        android:hint="First name"
-        android:inputType="textCapCharacters|textMultiLine" />
-
-    <EditText
-
-        android:id="@+id/lastName"
-        android:layout_width="309dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/personal-info"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="195dp"
-        android:hint="Last name"
-        android:inputType="textCapCharacters|textMultiLine" />
-
-    <EditText
-
-        android:id="@+id/personal-info"
-        android:layout_width="305dp"
-        android:layout_height="78dp"
-        android:layout_alignParentBottom="true"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="165dp"
-        android:hint="Personal information"
-        android:inputType="textCapCharacters|textMultiLine" />
-
-    <EditText
-
-        android:id="@+id/age"
-        android:layout_width="109dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/personal-info"
-        android:layout_centerVertical="true"
-        android:hint="age"
-        android:inputType="number"
-       />
-
-    <Button
-        android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/firstName"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="98dp"
-        android:background="@drawable/button_background"
-        android:onClick="saveUserData"
-        android:text="save"
-        android:textColor="#fff"
-        android:textStyle="bold" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,6 +46,67 @@
             android:text="STILL WALK"
             android:textColor="#fff"
             android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="107dp"
+        android:orientation="vertical">
+
+
+        <EditText
+
+            android:id="@+id/firstName"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="First name"
+            android:inputType="textCapCharacters|textMultiLine" />
+
+        <EditText
+
+            android:id="@+id/lastName"
+            android:layout_width="309dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:hint="Last name"
+            android:inputType="textCapCharacters|textMultiLine" />
+
+        <EditText
+
+            android:id="@+id/personal-info"
+            android:layout_width="305dp"
+            android:layout_height="78dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Personal information"
+            android:inputType="textCapCharacters|textMultiLine" />
+
+        <EditText
+
+            android:id="@+id/age"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="age"
+            android:inputType="number"
+            />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:layout_marginLeft="220dp"
+            android:onClick="saveUserData"
+            android:text="save"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.GetLocationService;
 import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
@@ -29,7 +30,7 @@ public class LoginPage extends AppCompatActivity {
     private String usernameText;
     public static final String MyPREFERENCES = "LoginInfo" ;
     private SharedPreferences sharedPreferences;
-    private SQLiteDatabase sqLiteDatabase;
+    private DatabaseHelper databaseHelper;
 
 
     @Override
@@ -70,6 +71,9 @@ public class LoginPage extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(usernameText) && !TextUtils.isEmpty(passwordText)) {
 
+                System.out.println(DatabaseHelper.DATABASE_VERSION);
+                databaseHelper = new DatabaseHelper(this);
+                databaseHelper.insertUsername(usernameText);
 
                 new Thread(() -> {
 

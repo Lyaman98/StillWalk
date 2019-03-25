@@ -33,7 +33,7 @@ public class GetLocationService extends Service {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Toast.makeText(context,location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -47,7 +47,7 @@ public class GetLocationService extends Service {
 
         };
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,0,locationListener);
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000,0,locationListener);
 
 
     }

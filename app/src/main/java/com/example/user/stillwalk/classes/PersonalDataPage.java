@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
 
+import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
 
@@ -31,10 +32,8 @@ public class PersonalDataPage extends AppCompatActivity {
     private UserData userData = new UserData();
     private User user;
     private Handler handler;
-    private SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "PersonalInfo" ;
-    public static final String USERNAME_PREFERENCES = "LoginInfo" ;
-
+    DatabaseHelper databaseHelper;
+    private SharedPreferences usernamePreference;
 
     String username;
 
@@ -51,45 +50,43 @@ public class PersonalDataPage extends AppCompatActivity {
         personal_info = findViewById(R.id.personal_info);
         age = findViewById(R.id.age);
         handler = new Handler();
+        databaseHelper = new DatabaseHelper(this);
 
-        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCES,MODE_PRIVATE);
-        username = sharedPreferences.getString("usernameKey","");
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
-        user = new User();
-        user.setUsername(username);
+        usernamePreference = getSharedPreferences("LoginInfo",MODE_PRIVATE);
+        user = databaseHelper.getUserByUsername(usernamePreference.getString("usernameKey",""));
+        username = user.getUsername();
 
-        if (!TextUtils.isEmpty(sharedPreferences.getString("firstNameKey",""))
-                && sharedPreferences.getString("usernameKey","").equals(username)){
+        if (user != null && user.getUsername() != null && user.getLastName() != null){
 
-            firstName.setText(sharedPreferences.getString("firstNameKey",""));
+            firstName.setText(user.getFirstName());
 
-            lastName.setText(sharedPreferences.getString("lastNameKey",""));
-            age.setText(String.valueOf(sharedPreferences.getInt("ageKey",0)));
-            personal_info.setText(sharedPreferences.getString("personalInfoKey",""));
+            lastName.setText(user.getLastName());
+            age.setText(String.valueOf(user.getAge()));
+            personal_info.setText(user.getPersonalInfo());
+
         }else {
 
             new Thread(() -> {
+
+
                 user = userData.getUserData(username);
+
                 handler.post(() -> {
 
                     firstName.setText(user.getFirstName());
                     lastName.setText(user.getLastName());
                     age.setText(String.valueOf(user.getAge()));
                     personal_info.setText(user.getPersonalInfo());
-                    saveDataToInternalStorage();
+
+                    databaseHelper.updatePersonalData(user);
                 });
-                user.setUsername(username);
             }).start();
         }
     }
 
     public void saveUserData(View view){
 
-                if (!isNetworkAvailable()){
-                    Toast.makeText(this,"Please connect to the internet..",Toast.LENGTH_LONG).show();
-                    return;
-                }
 
                 if (age.getText().toString().isEmpty()) {
                     Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
@@ -107,6 +104,7 @@ public class PersonalDataPage extends AppCompatActivity {
                         !TextUtils.isEmpty(personalInfoString) && ageInt != 0) {
 
 
+
                     user.setFirstName(firstNameString);
                     user.setLastName(lastNameString);
                     user.setPersonalInfo(personalInfoString);
@@ -120,7 +118,7 @@ public class PersonalDataPage extends AppCompatActivity {
 
                             if (check){
                                 Toast.makeText(this,"Data is saved",Toast.LENGTH_LONG).show();
-                                saveDataToInternalStorage();
+                                databaseHelper.updatePersonalData(user);
 
                             }else {
                                 Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
@@ -135,32 +133,6 @@ public class PersonalDataPage extends AppCompatActivity {
                 }
 
         }
-        public void saveDataToInternalStorage(){
 
-            String firstNameString = firstName.getText().toString();
-            String lastNameString = lastName.getText().toString();
-            String personalInfoString = personal_info.getText().toString();
-            int ageInt = Integer.parseInt(age.getText().toString());
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-            editor.putString("firstNameKey",firstNameString);
-            editor.putString("lastNameKey",lastNameString);
-            editor.putString("personalInfoKey",personalInfoString);
-            editor.putInt("ageKey",ageInt);
-            editor.putString("usernameKey",username);
-            editor.apply();
-
-
-        }
-
-        //??????????????????????????
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
 }
 

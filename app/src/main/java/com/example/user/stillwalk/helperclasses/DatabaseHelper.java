@@ -2,17 +2,19 @@ package com.example.user.stillwalk.helperclasses;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 
-import org.sqlite.SQLiteDataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "users.db";
+    public static  int DATABASE_VERSION = 2;
     public static final String TABLE_NAME = "userdata";
-    public static final String COL_1 = "id";
     public static final String COL_2 = "username";
     public static final String COL_3 = "age";
     public static final String COL_4 = "firstName";
@@ -23,8 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_9 = "message";
 
     public static final String CREATE_TABLE = "create table userdata(\n" +
-            "\tusername varchar(50),\n" +
-            "    password varchar(50),\n" +
+            "\tusername varchar(50) primary key unique ,\n" +
             "    firstName varchar(256),\n" +
             "    lastName varchar(256),\n" +
             "    personal_info text,\n" +
@@ -35,29 +36,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "    );";
 
 
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, version);
+    public DatabaseHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
 
-    public long insertUsername(String usernameValue) {
+    public  User getUserByUsername(String username){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COL_3,COL_4,COL_5,COL_6,COL_7,COL_8,COL_9},
+                COL_2  + "=?", new String[]{username},null,null,null);
+
+        User user = null;
+
+        if (cursor != null){
+            cursor.moveToFirst();
+
+            ArrayList<String> contacts = new ArrayList<>(Arrays.asList(
+                    cursor.getString(cursor.getColumnIndex(COL_7)),
+                    cursor.getString(cursor.getColumnIndex(COL_8))
+
+                    ));
+
+             user = new User(username,
+                    cursor.getInt(cursor.getColumnIndex(COL_3)),
+                    cursor.getString(cursor.getColumnIndex(COL_4)),
+                    cursor.getString(cursor.getColumnIndex(COL_5)),
+                    cursor.getString(cursor.getColumnIndex(COL_6)),
+                    contacts,
+                    cursor.getString(cursor.getColumnIndex(COL_9))
+            );
+
+            cursor.close();
+
+        }
+
+        return user;
+
+    }
+
+
+    public void insertUsername(String usernameValue) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues username = new ContentValues();
         username.put(COL_2,usernameValue);
 
-        long id = db.insert(TABLE_NAME,null,username);
+        if ( getUserByUsername(usernameValue) == null) {
 
-        return id;
+            db.insert(TABLE_NAME, null, username);
+        }
+
     }
 
-    public int updateFirstName(User user){
+    public void updatePersonalData(User user){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues firstName = new ContentValues();
-        firstName.put(COL_4,user.getFirstName());
 
-        return db.update(TABLE_NAME,firstName,COL_1 + " = ?",
-                new String[]{String.valueOf(user.getId())});
+        db.execSQL("update  " + TABLE_NAME + " set " +
+                COL_4 + " = '" + user.getFirstName() + "'," +
+                COL_5 + " = '" + user.getLastName() + "'," +
+                COL_6 + " = '" + user.getPersonalInfo() + "'," +
+                COL_3 + " = '" + user.getAge() + "' " +
+                "where username = '" + user.getUsername() + "'");
+
+    }
+
+    public void updateContacts(User user){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("update  " + TABLE_NAME + " set " +
+                COL_7 + " = '" + user.getContacts().get(0) + "'," +
+                COL_8 + " = '" + user.getContacts().get(1) + "'," +
+                COL_9 + " = '" + user.getMessage() + "' " +
+                "where username = '" + user.getUsername() + "'");
 
     }
 
@@ -68,6 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        System.out.println("DELETING ");
         sqLiteDatabase.execSQL("drop table if exists " + TABLE_NAME);
     }
 }

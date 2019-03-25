@@ -33,4 +33,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/mysql-connector-java-5.1.47.jar')
     implementation files('libs/sqlite-jdbc-3.21.0.jar')
+    implementation 'com.android.support:gridlayout-v7:27.1.1'
 }

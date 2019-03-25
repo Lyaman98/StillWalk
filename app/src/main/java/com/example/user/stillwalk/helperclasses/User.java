@@ -8,10 +8,22 @@ public class User {
     private String lastName;
     private int age;
     private String personalInfo;
-    private long id = 0;
     private String username;
     private ArrayList<String> contacts = new ArrayList<>();
     private String message;
+
+
+    public User(String username, int age, String firstName, String lastName, String personalInfo, ArrayList<String> contacts, String message) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.personalInfo = personalInfo;
+        this.contacts = contacts;
+        this.message = message;
+        this.username = username;
+    }
+
+    public User(){}
 
     public String getUsername() {
         return username;
@@ -56,13 +68,6 @@ public class User {
         return personalInfo;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public ArrayList<String> getContacts() {
         return contacts;
@@ -87,7 +92,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", personalInfo='" + personalInfo + '\'' +
-                ", id=" + id +
                 ", username='" + username + '\'' +
                 ", contacts=" + contacts +
                 ", message='" + message + '\'' +

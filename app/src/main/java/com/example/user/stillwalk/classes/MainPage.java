@@ -19,7 +19,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.GetLocationService;
+import com.example.user.stillwalk.helperclasses.User;
 
 import java.util.Arrays;
 

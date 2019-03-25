@@ -62,7 +62,6 @@ public class UserData {
 
             ResultSet resultSet = p.executeQuery();
 
-
             if(resultSet.next()){
 
                 User user = new User();
@@ -70,7 +69,7 @@ public class UserData {
                 user.setLastName(resultSet.getString(2));
                 user.setPersonalInfo(resultSet.getString(3));
                 user.setAge(resultSet.getInt(4));
-
+                user.setUsername(username);
 
                 return user;
             }
@@ -144,7 +143,7 @@ public class UserData {
 
                 user.setContacts(contacts);
                 user.setMessage(resultSet.getString(3));
-
+                user.setUsername(username);
 
                 return user;
             }

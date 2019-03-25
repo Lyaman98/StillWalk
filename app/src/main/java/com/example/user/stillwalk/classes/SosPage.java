@@ -13,33 +13,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.user.stillwalk.R;
+import com.example.user.stillwalk.helperclasses.DatabaseHelper;
+import com.example.user.stillwalk.helperclasses.User;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SosPage extends AppCompatActivity {
 
-    private TextView firstName;
-    private TextView lastName;
-    private TextView personalInfo;
-    private TextView age;
     private SharedPreferences sharedPreferences;
-    public static final String MyPREFERENCES = "PersonalInfo" ;
     public static final String USERNAME_PREFERENCES = "LoginInfo" ;
     private MediaPlayer mp;
     String username;
     private CountDownTimer timer;
+    private DatabaseHelper databaseHelper;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sos_page);
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        personalInfo = findViewById(R.id.personal_info);
-        age = findViewById(R.id.age);
-
+        TextView firstName = findViewById(R.id.firstName);
+        TextView lastName = findViewById(R.id.lastName);
+        TextView personalInfo = findViewById(R.id.personal_info);
+        TextView age = findViewById(R.id.age);
+        TextView contact1 = findViewById(R.id.contact1);
+        TextView contact2 = findViewById(R.id.contact2);
 
          mp = MediaPlayer.create(this, R.raw.sound);
 
@@ -54,19 +53,26 @@ public class SosPage extends AppCompatActivity {
              }
          }.start();
 
+         databaseHelper = new DatabaseHelper(this);
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCES, MODE_PRIVATE);
         username = sharedPreferences.getString("usernameKey", "");
+        User user = databaseHelper.getUserByUsername(username);
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        if (user != null) {
 
-        if (!TextUtils.isEmpty(sharedPreferences.getString("firstNameKey", ""))
-                && sharedPreferences.getString("usernameKey", "").equals(username)) {
+            if (user.getFirstName() != null) {
+                firstName.setText(firstName.getText()  + user.getFirstName());
+                lastName.setText(lastName.getText() + user.getLastName());
+                age.setText(age.getText() + String.valueOf(user.getAge()));
+                personalInfo.setText(personalInfo.getText() + user.getPersonalInfo());
+            }
 
-            firstName.setText(sharedPreferences.getString("firstNameKey", ""));
+            if (user.getContacts().size() > 0){
+                contact1.setText(contact1.getText() + user.getContacts().get(0));
+                contact2.setText(contact2.getText() + user.getContacts().get(1));
 
-            lastName.setText(sharedPreferences.getString("lastNameKey", ""));
-            age.setText(String.valueOf(sharedPreferences.getInt("ageKey", 0)));
-            personalInfo.setText(sharedPreferences.getString("personalInfoKey", ""));
+            }
+
         }
     }
 
