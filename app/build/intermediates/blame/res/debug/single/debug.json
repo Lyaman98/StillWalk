@@ -396,12 +396,12 @@
         "source": "/Users/lyaman/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/0939a0d9ae7f7a7bd3e2c8eb83d184ef/res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
-        "source": "/Users/lyaman/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/0939a0d9ae7f7a7bd3e2c8eb83d184ef/res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/layout_sos_page.xml.flat",
         "source": "/Users/lyaman/Desktop/StillWalkApp/app/src/main/res/layout/sos_page.xml"
+    },
+    {
+        "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
+        "source": "/Users/lyaman/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/0939a0d9ae7f7a7bd3e2c8eb83d184ef/res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -422,6 +422,10 @@
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/layout_register_page.xml.flat",
         "source": "/Users/lyaman/Desktop/StillWalkApp/app/src/main/res/layout/register_page.xml"
+    },
+    {
+        "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-v24_signup.png.flat",
+        "source": "/Users/lyaman/Desktop/StillWalkApp/app/src/main/res/drawable-v24/signup.png"
     },
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable_button_background.xml.flat",
@@ -1136,6 +1140,10 @@
         "source": "/Users/lyaman/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/0939a0d9ae7f7a7bd3e2c8eb83d184ef/res/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-v24_mail.png.flat",
+        "source": "/Users/lyaman/Desktop/StillWalkApp/app/src/main/res/drawable-v24/mail.png"
+    },
+    {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
         "source": "/Users/lyaman/Desktop/StillWalkApp/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_launcher_background.png"
     },
@@ -1178,6 +1186,10 @@
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "/Users/lyaman/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/0939a0d9ae7f7a7bd3e2c8eb83d184ef/res/drawable-xxxhdpi-v4/abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable_corner.xml.flat",
+        "source": "/Users/lyaman/Desktop/StillWalkApp/app/src/main/res/drawable/corner.xml"
     },
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -1482,6 +1494,10 @@
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_background_transition_holo_dark.xml.flat",
         "source": "/Users/lyaman/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/0939a0d9ae7f7a7bd3e2c8eb83d184ef/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/drawable-v24_lock.png.flat",
+        "source": "/Users/lyaman/Desktop/StillWalkApp/app/src/main/res/drawable-v24/lock.png"
     },
     {
         "merged": "/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/res/merged/debug/color_abc_hint_foreground_material_light.xml.flat",

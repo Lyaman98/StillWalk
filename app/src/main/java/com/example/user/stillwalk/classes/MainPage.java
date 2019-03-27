@@ -61,13 +61,13 @@ public class MainPage extends AppCompatActivity {
 
         signOut.setOnClickListener(v -> {
 
+            stopService(new Intent(this,GetLocationService.class));
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("usernameKey","");
 
             editor.apply();
             startActivity(new Intent(MainPage.this,LoginPage.class));
         });
-
 
         startService(new Intent(this, GetLocationService.class));
 

@@ -47,25 +47,19 @@ public class SmsPage extends AppCompatActivity {
 
     private UserData userData;
     private User user;
-
     private Button otherReasonB;
     private Button tensionB;
     private Button dizzinessB;
     private Button hearAttackB;
     public TextView loadingText;
     public ProgressBar progressBar;
-
-
     private String username;
     private LocationListener locationListener;
     private LocationManager locationManager;
     private Location myLocation;
-    public static final String MyPREFERENCES = "ContactsInfo";
     public static final String USERNAME_PREFERENCE = "LoginInfo";
-
     public SharedPreferences sharedPreferences;
     private boolean haveContacts = false;
-    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +76,7 @@ public class SmsPage extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
         username = sharedPreferences.getString("usernameKey","");
-        databaseHelper = new DatabaseHelper(this);
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
         myLocation = new Location("");
         user = databaseHelper.getUserByUsername(username);
 

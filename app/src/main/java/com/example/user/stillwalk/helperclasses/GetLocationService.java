@@ -74,6 +74,7 @@ public class GetLocationService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        locationManager.removeUpdates(locationListener);
     }
 
 

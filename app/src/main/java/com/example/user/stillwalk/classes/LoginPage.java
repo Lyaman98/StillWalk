@@ -2,32 +2,35 @@ package com.example.user.stillwalk.classes;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
-import com.example.user.stillwalk.helperclasses.GetLocationService;
 import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
-
-import org.sqlite.SQLiteDataSource;
 
 public class LoginPage extends AppCompatActivity {
 
 //    private UserData userData = new UserData();
+    private TextView signInText;
+    private TextView signUpText;
     private UserData userData;
     private EditText username;
     private EditText password;
     private Handler handler;
     private String usernameText;
+    private Button login;
     public static final String MyPREFERENCES = "LoginInfo" ;
     private SharedPreferences sharedPreferences;
     private DatabaseHelper databaseHelper;
@@ -40,10 +43,22 @@ public class LoginPage extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
+        login = findViewById(R.id.login);
+        signInText = findViewById(R.id.sign_text);
+        signUpText = findViewById(R.id.register);
 
         handler = new Handler();
         userData = new UserData();
         sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+
+        Typeface face;
+
+        face = Typeface.createFromAsset(getAssets(), "font/font.otf");
+
+        signInText.setTypeface(face);
+        login.setTypeface(face);
+        signUpText.setTypeface(face);
+        signUpText.setPaintFlags(signUpText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         if (!TextUtils.isEmpty(usernameText = sharedPreferences.getString("usernameKey",""))){
             Intent intent = new Intent(this, MainPage.class);
@@ -55,7 +70,7 @@ public class LoginPage extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         assert inputMethodManager != null;
         inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
-
+        onHoverChanges();
 
     }
 
@@ -116,4 +131,18 @@ public class LoginPage extends AppCompatActivity {
         editor.apply();
 
     }
+
+    private void onHoverChanges(){
+
+        login.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean onFocus) {
+                if (onFocus){
+                    System.out.println("YEES");
+                }
+            }
+        });
+    }
+
+
 }
