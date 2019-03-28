@@ -1,7 +1,9 @@
 package com.example.user.stillwalk.classes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -11,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
@@ -20,6 +25,8 @@ import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
 
+import java.util.ArrayList;
+
 
 public class PersonalDataPage extends AppCompatActivity {
 
@@ -27,13 +34,14 @@ public class PersonalDataPage extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private EditText personal_info;
-    private EditText age;
+    private Spinner age;
 
     private UserData userData = new UserData();
     private User user;
     private Handler handler;
     DatabaseHelper databaseHelper;
     private SharedPreferences usernamePreference;
+    private ArrayList<Integer> ageList;
 
     String username;
 
@@ -52,17 +60,19 @@ public class PersonalDataPage extends AppCompatActivity {
         handler = new Handler();
         databaseHelper = new DatabaseHelper(this);
 
-
         usernamePreference = getSharedPreferences("LoginInfo",MODE_PRIVATE);
         user = databaseHelper.getUserByUsername(usernamePreference.getString("usernameKey",""));
         username = user.getUsername();
+
+        setAgeList();
+
 
         if (user != null && user.getUsername() != null && user.getLastName() != null){
 
             firstName.setText(user.getFirstName());
 
             lastName.setText(user.getLastName());
-            age.setText(String.valueOf(user.getAge()));
+            age.setSelection(user.getAge() - 5);
             personal_info.setText(user.getPersonalInfo());
 
         }else {
@@ -76,7 +86,7 @@ public class PersonalDataPage extends AppCompatActivity {
 
                     firstName.setText(user.getFirstName());
                     lastName.setText(user.getLastName());
-                    age.setText(String.valueOf(user.getAge()));
+                    age.setSelection(user.getAge()- 5);
                     personal_info.setText(user.getPersonalInfo());
 
                     databaseHelper.updatePersonalData(user);
@@ -87,18 +97,10 @@ public class PersonalDataPage extends AppCompatActivity {
 
     public void saveUserData(View view){
 
-
-                if (age.getText().toString().isEmpty()) {
-                    Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
-                    return;
-
-                }
-
-
                 String firstNameString = firstName.getText().toString();
                 String lastNameString = lastName.getText().toString();
                 String personalInfoString = personal_info.getText().toString();
-                int ageInt = Integer.parseInt(age.getText().toString());
+                int ageInt = Integer.parseInt(age.getSelectedItem().toString());
 
                 if (!TextUtils.isEmpty(firstNameString) && !TextUtils.isEmpty(lastNameString) &&
                         !TextUtils.isEmpty(personalInfoString) && ageInt != 0) {
@@ -131,6 +133,23 @@ public class PersonalDataPage extends AppCompatActivity {
                 } else {
                     Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 }
+
+        }
+
+        public void setAgeList(){
+
+            ageList = new ArrayList<>();
+            for (int i = 5; i < 100; i++){
+                ageList.add(i);
+            }
+            ArrayAdapter<Integer> listofAges = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,ageList);
+            age.setAdapter(listofAges);
+        }
+
+        public void onBackPressed(){
+            Intent intent = new Intent(PersonalDataPage.this,MainPage.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
         }
 

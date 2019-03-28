@@ -91,7 +91,7 @@ public class User {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", personalInfo='" + personalInfo + '\'' +
+                ", personalinfo='" + personalInfo + '\'' +
                 ", username='" + username + '\'' +
                 ", contacts=" + contacts +
                 ", message='" + message + '\'' +

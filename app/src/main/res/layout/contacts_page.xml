@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
-    android:layout_height="match_parent">
+    android:background="@color/background"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <LinearLayout
@@ -15,12 +15,12 @@
         android:background="@drawable/background_with_shadow">
 
         <TextView
-            android:layout_width="306dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="Contacts"
-            android:layout_marginLeft="50dp"
+            android:gravity="center"
             android:textColor="#fff"
             android:textSize="25dp" />
     </LinearLayout>
@@ -44,55 +44,58 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="46dp"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@android:drawable/ic_menu_always_landscape_portrait" />
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="289dp"
+        android:layout_height="349dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="96dp"
-        android:orientation="vertical">
-
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:layout_marginEnd="@dimen/_45sdp"
+        android:background="@drawable/corner"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="130dp">
 
         <EditText
             android:id="@+id/phone1_id"
-            android:layout_width="296dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:hint="Enter your phone number"
             android:inputType="phone" />
 
         <EditText
             android:id="@+id/phone2_id"
-            android:layout_width="292dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:hint="Enter your phone number"
             android:inputType="phone" />
 
         <EditText
             android:id="@+id/messsage_id"
-            android:layout_width="295dp"
-            android:layout_height="73dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:hint="Enter your message here"
             android:inputType="textCapCharacters|textMultiLine" />
 
         <Button
             android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="210dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/button_background"
             android:onClick="saveContacts"
             android:text="save"

@@ -70,13 +70,13 @@ public class LoginPage extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         assert inputMethodManager != null;
         inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
-        onHoverChanges();
 
     }
 
     public void registerClick(View view){
 
         startActivity(new Intent(LoginPage.this,Register.class));
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
     }
     public void loginClick(View view){
@@ -131,18 +131,5 @@ public class LoginPage extends AppCompatActivity {
         editor.apply();
 
     }
-
-    private void onHoverChanges(){
-
-        login.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean onFocus) {
-                if (onFocus){
-                    System.out.println("YEES");
-                }
-            }
-        });
-    }
-
 
 }

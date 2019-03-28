@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Mar 27 22:38:51 AZT 2019
+#Thu Mar 28 00:59:39 AZT 2019
 1.base=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/assets/debug
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY

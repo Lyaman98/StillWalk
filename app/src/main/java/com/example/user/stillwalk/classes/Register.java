@@ -1,5 +1,8 @@
 package com.example.user.stillwalk.classes;
 
+import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +23,20 @@ public class Register extends AppCompatActivity {
     private TextView userName;
     private TextView password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
         userName = findViewById(R.id.username);
         password =findViewById(R.id.password);
+        TextView sign_text = findViewById(R.id.sign_text);
+        TextView sign_in = findViewById(R.id.sign_in);
+
+        Typeface typeface = Typeface.createFromAsset(getAssets(),"font/font.otf");
+        sign_text.setTypeface(typeface);
+        sign_in.setTypeface(typeface);
+        sign_in.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         userData = new UserData();
         handler = new Handler();
@@ -58,4 +69,12 @@ public class Register extends AppCompatActivity {
         }).start();
 
     }
+
+    public void signInClick(View view){
+        Intent intent = new Intent(getApplicationContext(),LoginPage.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    public void onBackPressed(){}
 }

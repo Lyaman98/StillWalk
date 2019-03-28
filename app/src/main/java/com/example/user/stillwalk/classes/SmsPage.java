@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,10 +48,10 @@ public class SmsPage extends AppCompatActivity {
 
     private UserData userData;
     private User user;
-    private Button otherReasonB;
-    private Button tensionB;
-    private Button dizzinessB;
-    private Button hearAttackB;
+    private CardView otherReasonB;
+    private CardView tensionB;
+    private CardView dizzinessB;
+    private CardView hearAttackB;
     public TextView loadingText;
     public ProgressBar progressBar;
     private String username;
@@ -309,4 +310,10 @@ public class SmsPage extends AppCompatActivity {
         return check == PackageManager.PERMISSION_GRANTED;
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent(this,MainPage.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+
+    }
 }

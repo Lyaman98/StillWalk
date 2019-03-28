@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background_with_shadow">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="55dp"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+        <TextView
+            android:layout_width="306dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:text="Personal Information"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="420dp"
+        android:layout_height="480dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_75sdp"
+        android:background="@drawable/corner"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="130dp">
+
+
+        <EditText
+
+            android:id="@+id/firstName"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center"
+            android:hint="First name"
+            android:inputType="textCapCharacters|textMultiLine" />
+
+        <EditText
+
+            android:id="@+id/lastName"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:gravity="center"
+            android:hint="Last name"
+            android:inputType="textCapCharacters|textMultiLine" />
+
+        <EditText
+
+            android:id="@+id/personal-info"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:gravity="center"
+            android:hint="Personal information"
+            android:inputType="textCapCharacters|textMultiLine" />
+
+        <Spinner
+            android:id="@+id/age"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginBottom="20dp" />
+
+        <Spinner
+            android:id="@+id/bloodType"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginBottom="20dp"
+            android:textAlignment="textStart" />
+
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:onClick="saveUserData"
+            android:text="save"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/background_with_shadow">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="120dp"
+            android:layout_weight="1"
+            android:text="STILL WALK"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

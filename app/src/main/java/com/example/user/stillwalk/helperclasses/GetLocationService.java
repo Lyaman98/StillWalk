@@ -42,7 +42,7 @@ public class GetLocationService extends Service {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Toast.makeText(context,location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,location.getLatitude() + " " + location.getLongitude(), Toast.LENGTH_SHORT).show();
                 databaseHelper.updateLocation(username,location.getLatitude(),location.getLongitude());
             }
 

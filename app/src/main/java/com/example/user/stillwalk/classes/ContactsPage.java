@@ -1,5 +1,6 @@
 package com.example.user.stillwalk.classes;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -115,6 +116,13 @@ public class ContactsPage extends AppCompatActivity {
         }else {
             Toast.makeText(this,"Please fill all fields!",Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    public void onBackPressed(){
+        Intent intent = new Intent(this,MainPage.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
     }
 
