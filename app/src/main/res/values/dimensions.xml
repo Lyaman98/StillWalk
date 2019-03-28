@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width">110dp</dimen>
+    <dimen name="width2">47dp</dimen>
+    <dimen name="height">30dp</dimen>
+    <dimen name="swidth">40dp</dimen>
+
+</resources>
