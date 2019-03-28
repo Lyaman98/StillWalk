@@ -47,9 +47,9 @@
 
 
     <LinearLayout
-        android:layout_width="311dp"
+        android:layout_width="@dimen/_240sdp"
         android:layout_height="306dp"
-        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_90sdp"
         android:background="@drawable/corner"
         android:orientation="vertical"
@@ -57,10 +57,10 @@
 
         <TextView
             android:id="@+id/sign_text"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_80sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="casualsans-serif-light"
             android:text="Sign up"
             android:textColor="@color/black"
@@ -68,22 +68,22 @@
 
         <EditText
             android:id="@+id/username"
-            android:layout_width="260dp"
+            android:layout_width="@dimen/_220sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:drawableLeft="@drawable/mail"
             android:hint="Username"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="260dp"
+            android:layout_width="@dimen/_220sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:drawableLeft="@drawable/lock"
             android:hint="Password"
             android:inputType="textPassword"
@@ -91,9 +91,9 @@
 
         <Button
             android:id="@+id/save"
-            android:layout_width="260dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="25dp"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:background="@drawable/button_background"
             android:onClick="saveContact"
             android:text="Save"
@@ -104,14 +104,14 @@
 
     <TextView
         android:id="@+id/sign_in"
-        android:layout_width="200dp"
+        android:layout_width="@dimen/_170sdp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:drawableLeft="@drawable/signup"
         android:textAlignment="center"
         android:textSize="16dp"
         android:layout_marginBottom="@dimen/_90sdp"
-        android:layout_marginStart="@dimen/_85sdp"
+        android:layout_marginStart="@dimen/_75sdp"
         android:onClick="signInClick"
         android:text="Sign In To Your Account" />
 

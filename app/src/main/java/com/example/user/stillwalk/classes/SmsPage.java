@@ -84,7 +84,7 @@ public class SmsPage extends AppCompatActivity {
 
         ArrayList<String> location = databaseHelper.getLocation(username);
 
-        if (location == null){
+        if (location.get(0) == null && location.get(1) == null){
             checkLocation();
         }else {
             myLocation.setLatitude(Double.valueOf(location.get(0)));

@@ -2,13 +2,16 @@ package com.example.user.stillwalk.classes;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -39,21 +42,51 @@ public class SosPage extends AppCompatActivity {
         TextView age = findViewById(R.id.age);
         TextView contact1 = findViewById(R.id.contact1);
         TextView contact2 = findViewById(R.id.contact2);
+        TextView bloodType = findViewById(R.id.bloodType);
+        TextView sos = findViewById(R.id.sos_text);
 
-         mp = MediaPlayer.create(this, R.raw.sound);
+        Typeface typeface = Typeface.createFromAsset(getAssets(),"font/font.otf");
+        lastName.setTypeface(typeface);
+        firstName.setTypeface(typeface);
+        personalInfo.setTypeface(typeface);
+        age.setTypeface(typeface);
+        contact1.setTypeface(typeface);
+        contact2.setTypeface(typeface);
+        bloodType.setTypeface(typeface);
 
-         timer = new CountDownTimer(  300*1000,10000) {
+        new CountDownTimer(300*1000,1000){
+            @Override
+            public void onTick(long l) {
+                if (sos.getVisibility() == View.VISIBLE){
+                    sos.setVisibility(View.INVISIBLE);
+                }else {
+                    sos.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+
+
+        mp = MediaPlayer.create(this, R.raw.sound);
+
+        timer = new CountDownTimer(  300*1000,10000) {
              @Override
              public void onTick(long l) {
+
                  mp.start();
              }
 
              @Override
              public void onFinish() {
              }
+
          }.start();
 
-         databaseHelper = new DatabaseHelper(this);
+        databaseHelper = new DatabaseHelper(this);
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCES, MODE_PRIVATE);
         username = sharedPreferences.getString("usernameKey", "");
         User user = databaseHelper.getUserByUsername(username);
@@ -81,6 +114,7 @@ public class SosPage extends AppCompatActivity {
         if (mp.isPlaying()){
             mp.stop();
             timer.cancel();
+
         }
 
         Intent intent = new Intent( SosPage.this,MainPage.class);

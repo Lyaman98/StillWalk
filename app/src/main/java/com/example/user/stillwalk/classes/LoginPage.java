@@ -3,11 +3,14 @@ package com.example.user.stillwalk.classes;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -69,7 +72,8 @@ public class LoginPage extends AppCompatActivity {
 
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         assert inputMethodManager != null;
-        inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(login.getWindowToken(),0);
+
 
     }
 

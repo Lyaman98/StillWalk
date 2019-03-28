@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#303F9F</color>
     <color name="background">#F6F5FB</color>
+    <color name="white">#ffff</color>
     <color name="black">#1E1D1B</color>
     <color name="orange">#FF5521</color>
     <color name="red">#BA6764</color>
@@ -17,4 +18,5 @@
     <color name="testcolorblue">#152b38</color>
     <color name="pink">#fe104d</color>
     <color name="black_overlay">#66000000</color>
+    <color name="redtransparent">#BC9E2222</color>
 </resources>

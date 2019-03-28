@@ -35,13 +35,14 @@ public class PersonalDataPage extends AppCompatActivity {
     private EditText lastName;
     private EditText personal_info;
     private Spinner age;
+    private Spinner bloodType;
 
     private UserData userData = new UserData();
     private User user;
     private Handler handler;
     DatabaseHelper databaseHelper;
     private SharedPreferences usernamePreference;
-    private ArrayList<Integer> ageList;
+
 
     String username;
 
@@ -57,15 +58,17 @@ public class PersonalDataPage extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         personal_info = findViewById(R.id.personal_info);
         age = findViewById(R.id.age);
+        bloodType = findViewById(R.id.bloodType);
         handler = new Handler();
         databaseHelper = new DatabaseHelper(this);
+
 
         usernamePreference = getSharedPreferences("LoginInfo",MODE_PRIVATE);
         user = databaseHelper.getUserByUsername(usernamePreference.getString("usernameKey",""));
         username = user.getUsername();
 
         setAgeList();
-
+        setBloodTypeList();
 
         if (user != null && user.getUsername() != null && user.getLastName() != null){
 
@@ -138,12 +141,29 @@ public class PersonalDataPage extends AppCompatActivity {
 
         public void setAgeList(){
 
-            ageList = new ArrayList<>();
+            ArrayList<Integer> ageList = new ArrayList<>();
             for (int i = 5; i < 100; i++){
                 ageList.add(i);
             }
             ArrayAdapter<Integer> listofAges = new ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,ageList);
             age.setAdapter(listofAges);
+        }
+
+        public void setBloodTypeList(){
+
+            ArrayList<String> bloodTypes = new ArrayList<>();
+            bloodTypes.add("1(+)");
+            bloodTypes.add("1(-)");
+            bloodTypes.add("2(+)");
+            bloodTypes.add("2(-)");
+            bloodTypes.add("3(+)");
+            bloodTypes.add("3(-)");
+            bloodTypes.add("4(+)");
+            bloodTypes.add("4(-)");
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1,bloodTypes);
+            bloodType.setAdapter(arrayAdapter);
+
         }
 
         public void onBackPressed(){
