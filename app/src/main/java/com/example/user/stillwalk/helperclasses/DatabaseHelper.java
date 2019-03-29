@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -138,6 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_3 + " = '" + user.getAge() + "' ," +
                 COL_1 + " ='"  +  user.getBloodType() + "' " +
                 "where username = '" + user.getUsername() + "'");
+
 
     }
 

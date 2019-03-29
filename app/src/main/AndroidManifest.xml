@@ -27,6 +27,7 @@
         <activity android:name=".classes.SmsPage"/>
         <activity android:name=".classes.Register"/>
         <activity android:name=".classes.MainPage"/>
+        <activity android:name=".classes.StillWalkInfo"/>
         <service android:name=".helperclasses.GetLocationService" android:exported="false" />
 
         <activity android:name=".classes.LoginPage">

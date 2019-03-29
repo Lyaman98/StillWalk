@@ -98,6 +98,7 @@ public class SosPage extends AppCompatActivity {
                 lastName.setText(lastName.getText() + user.getLastName());
                 age.setText(age.getText() + String.valueOf(user.getAge()));
                 personalInfo.setText(personalInfo.getText() + user.getPersonalInfo());
+                bloodType.setText(bloodType.getText() + user.getBloodType());
             }
 
             if (user.getContacts().get(0) != null){

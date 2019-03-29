@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -101,6 +102,7 @@ public class ContactsPage extends AppCompatActivity {
 
                 handler.post(()->{
                     databaseHelper.updateContacts(user);
+                    Toast.makeText(this,"Data is saved", Toast.LENGTH_LONG).show();
                 });
             }).start();
 
@@ -110,6 +112,16 @@ public class ContactsPage extends AppCompatActivity {
 
     }
 
+
+    public void hideKeyboard(View view){
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        assert inputMethodManager != null;
+        inputMethodManager.hideSoftInputFromWindow(phoneNumber1.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(phoneNumber2.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(message.getWindowToken(),0);
+
+
+    }
     public void onBackPressed(){
         Intent intent = new Intent(this,MainPage.class);
         startActivity(intent);

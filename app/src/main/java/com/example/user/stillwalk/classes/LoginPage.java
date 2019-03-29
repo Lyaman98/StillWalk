@@ -59,7 +59,6 @@ public class LoginPage extends AppCompatActivity {
         face = Typeface.createFromAsset(getAssets(), "font/font.otf");
 
         signInText.setTypeface(face);
-        login.setTypeface(face);
         signUpText.setTypeface(face);
         signUpText.setPaintFlags(signUpText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
@@ -70,12 +69,9 @@ public class LoginPage extends AppCompatActivity {
             this.startActivity(intent);
         }
 
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        assert inputMethodManager != null;
-        inputMethodManager.hideSoftInputFromWindow(login.getWindowToken(),0);
-
 
     }
+
 
     public void registerClick(View view){
 
@@ -133,6 +129,20 @@ public class LoginPage extends AppCompatActivity {
         editor.putString("usernameKey",usernameKey);
 
         editor.apply();
+
+    }
+
+    public void hideKeyboard(View view){
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        assert inputMethodManager != null;
+        inputMethodManager.hideSoftInputFromWindow(login.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
+
+
+
+    }
+
+    public void onBackPressed(){
 
     }
 

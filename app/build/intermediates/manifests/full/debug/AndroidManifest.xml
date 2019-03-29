@@ -37,6 +37,7 @@
         <activity android:name="com.example.user.stillwalk.classes.SmsPage" />
         <activity android:name="com.example.user.stillwalk.classes.Register" />
         <activity android:name="com.example.user.stillwalk.classes.MainPage" />
+        <activity android:name="com.example.user.stillwalk.classes.StillWalkInfo" />
 
         <service
             android:name="com.example.user.stillwalk.helperclasses.GetLocationService"

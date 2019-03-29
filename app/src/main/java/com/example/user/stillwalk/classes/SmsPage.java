@@ -22,6 +22,7 @@ import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -98,7 +99,9 @@ public class SmsPage extends AppCompatActivity {
         username = sharedPreferences.getString("usernameKey","");
         getUser();
 
-
+        Toast.makeText(this,
+                "Pay attention that every click of SOS button takes money from your phone",
+                Toast.LENGTH_LONG).show();
     }
 
 
@@ -309,6 +312,7 @@ public class SmsPage extends AppCompatActivity {
 
         return check == PackageManager.PERMISSION_GRANTED;
     }
+
 
     public void onBackPressed(){
         Intent intent = new Intent(this,MainPage.class);

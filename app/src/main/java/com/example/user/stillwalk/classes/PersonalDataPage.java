@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -124,6 +125,7 @@ public class PersonalDataPage extends AppCompatActivity {
                         userData.addUserData(user);
                         handler.post(()->{
                             databaseHelper.updatePersonalData(user);
+                            Toast.makeText(this,"Data is saved", Toast.LENGTH_SHORT).show();
                         });
                     }).start();
 
@@ -157,6 +159,17 @@ public class PersonalDataPage extends AppCompatActivity {
 
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1,bloodTypes);
             bloodType.setAdapter(arrayAdapter);
+
+        }
+
+        public void hideKeyboard(View view){
+
+            InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            assert inputMethodManager != null;
+            inputMethodManager.hideSoftInputFromWindow(firstName.getWindowToken(),0);
+            inputMethodManager.hideSoftInputFromWindow(lastName.getWindowToken(),0);
+            inputMethodManager.hideSoftInputFromWindow(personal_info.getWindowToken(),0);
+
 
         }
 

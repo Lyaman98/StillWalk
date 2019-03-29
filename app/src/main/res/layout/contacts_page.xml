@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="hideKeyboard">
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,6 +58,8 @@
         android:layout_marginTop="@dimen/_80sdp"
         android:layout_marginStart="@dimen/_30sdp"
         android:background="@drawable/corner"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="130dp">
 

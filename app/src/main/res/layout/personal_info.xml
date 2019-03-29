@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="hideKeyboard">
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="@dimen/_240sdp"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/_37sdp"
         android:orientation="vertical"
         android:background="@color/white"
+        android:layout_centerHorizontal="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="130dp">

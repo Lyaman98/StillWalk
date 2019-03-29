@@ -75,9 +75,15 @@ public class MainPage extends AppCompatActivity {
             startActivity(new Intent(MainPage.this,LoginPage.class));
         });
 
+
         startService(new Intent(this, GetLocationService.class));
 
 
+    }
+
+    public void appInfo(View view){
+        Intent intent = new Intent(this,StillWalkInfo.class);
+        startActivity(intent);
     }
 
     @Override
