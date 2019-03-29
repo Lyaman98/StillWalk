@@ -42,6 +42,7 @@ public class PersonalDataPage extends AppCompatActivity {
     private Handler handler;
     DatabaseHelper databaseHelper;
     private SharedPreferences usernamePreference;
+    private ArrayList<String> bloodTypes;
 
 
     String username;
@@ -77,6 +78,7 @@ public class PersonalDataPage extends AppCompatActivity {
             lastName.setText(user.getLastName());
             age.setSelection(user.getAge() - 5);
             personal_info.setText(user.getPersonalInfo());
+            bloodType.setSelection(bloodTypes.indexOf(user.getBloodType()));
 
         }else {
 
@@ -91,7 +93,7 @@ public class PersonalDataPage extends AppCompatActivity {
                     lastName.setText(user.getLastName());
                     age.setSelection(user.getAge()- 5);
                     personal_info.setText(user.getPersonalInfo());
-
+                    bloodType.setSelection(bloodTypes.indexOf(user.getBloodType()));
                     databaseHelper.updatePersonalData(user);
                 });
             }).start();
@@ -104,6 +106,7 @@ public class PersonalDataPage extends AppCompatActivity {
                 String lastNameString = lastName.getText().toString();
                 String personalInfoString = personal_info.getText().toString();
                 int ageInt = Integer.parseInt(age.getSelectedItem().toString());
+                String bloodTypeValue = bloodType.getSelectedItem().toString();
 
                 if (!TextUtils.isEmpty(firstNameString) && !TextUtils.isEmpty(lastNameString) &&
                         !TextUtils.isEmpty(personalInfoString) && ageInt != 0) {
@@ -114,22 +117,13 @@ public class PersonalDataPage extends AppCompatActivity {
                     user.setLastName(lastNameString);
                     user.setPersonalInfo(personalInfoString);
                     user.setAge(ageInt);
+                    user.setBloodType(bloodTypeValue);
 
                     new Thread(()-> {
 
-                        boolean check =  userData.addUserData(user);
-
+                        userData.addUserData(user);
                         handler.post(()->{
-
-                            if (check){
-                                Toast.makeText(this,"Data is saved",Toast.LENGTH_LONG).show();
-                                databaseHelper.updatePersonalData(user);
-
-                            }else {
-                                Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
-
-                            }
-
+                            databaseHelper.updatePersonalData(user);
                         });
                     }).start();
 
@@ -151,7 +145,7 @@ public class PersonalDataPage extends AppCompatActivity {
 
         public void setBloodTypeList(){
 
-            ArrayList<String> bloodTypes = new ArrayList<>();
+            bloodTypes = new ArrayList<>();
             bloodTypes.add("1(+)");
             bloodTypes.add("1(-)");
             bloodTypes.add("2(+)");

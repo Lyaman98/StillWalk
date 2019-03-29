@@ -1,11 +1,15 @@
 #Internal package file, do not edit.
-#Fri Mar 29 00:57:52 AZT 2019
+#Fri Mar 29 13:49:59 AZT 2019
 1.base=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/assets/debug
+2.path=font/font.otf
 0.baseType=DIRECTORY
+2.base=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/assets/debug
+2.set=ASSET
 1.baseType=DIRECTORY
-count=2
+count=3
 1.set=ASSET
 0.path=classes.dex
 0.set=DEX
 0.base=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/transforms/dexMerger/debug/0
-1.path=font/font.otf
+2.baseType=DIRECTORY
+1.path=font/font3.otf

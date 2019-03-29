@@ -13,9 +13,10 @@ import java.util.Arrays;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "users.db";
-    public static  int DATABASE_VERSION = 6;
+    public static  int DATABASE_VERSION = 7;
     public static final String TABLE_NAME = "userdata";
     public static final String TABLE_NAME2 = "userlocation";
+    public static final String COL_1 = "blood_type";
     public static final String COL_2 = "username";
     public static final String COL_3 = "age";
     public static final String COL_4 = "firstName";
@@ -36,7 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "    contact1 varchar(256),\n" +
             "    contact2 varchar(256),\n" +
             "    message text,\n" +
-            "    age int\n" +
+            "    age int,\n" +
+            "    blood_type varchar(5)\n" +
             "    );";
 
     private static final String CREATE_TABLE2 = "create table userlocation(\n" +
@@ -55,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.query(TABLE_NAME, new String[]{COL_3,COL_4,COL_5,COL_6,COL_7,COL_8,COL_9},
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COL_1,COL_3,COL_4,COL_5,COL_6,COL_7,COL_8,COL_9},
                 COL_2  + "=?", new String[]{username},null,null,null);
 
         User user = null;
@@ -75,7 +77,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(COL_5)),
                     cursor.getString(cursor.getColumnIndex(COL_6)),
                     contacts,
-                    cursor.getString(cursor.getColumnIndex(COL_9))
+                    cursor.getString(cursor.getColumnIndex(COL_9)),
+                    cursor.getString(cursor.getColumnIndex(COL_1))
+
             );
 
             cursor.close();
@@ -131,7 +135,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_4 + " = '" + user.getFirstName() + "'," +
                 COL_5 + " = '" + user.getLastName() + "'," +
                 COL_6 + " = '" + user.getPersonalInfo() + "'," +
-                COL_3 + " = '" + user.getAge() + "' " +
+                COL_3 + " = '" + user.getAge() + "' ," +
+                COL_1 + " ='"  +  user.getBloodType() + "' " +
                 "where username = '" + user.getUsername() + "'");
 
     }

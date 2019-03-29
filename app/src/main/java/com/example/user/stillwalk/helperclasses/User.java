@@ -11,9 +11,11 @@ public class User {
     private String username;
     private ArrayList<String> contacts = new ArrayList<>();
     private String message;
+    private String bloodType;
 
 
-    public User(String username, int age, String firstName, String lastName, String personalInfo, ArrayList<String> contacts, String message) {
+    public User(String username, int age, String firstName, String lastName, String personalInfo,
+                ArrayList<String> contacts, String message, String bloodType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -21,6 +23,7 @@ public class User {
         this.contacts = contacts;
         this.message = message;
         this.username = username;
+        this.bloodType = bloodType;
     }
 
     public User(){}
@@ -83,6 +86,14 @@ public class User {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 
     @Override

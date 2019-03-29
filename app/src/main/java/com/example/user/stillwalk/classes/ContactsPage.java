@@ -97,19 +97,10 @@ public class ContactsPage extends AppCompatActivity {
 
             new Thread(()-> {
 
-               boolean check =  userData.addContacts(user);
+                userData.addContacts(user);
 
                 handler.post(()->{
-
-                    if (check){
-                        Toast.makeText(this,"Data is saved",Toast.LENGTH_LONG).show();
-                        databaseHelper.updateContacts(user);
-
-                    }else {
-                        Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
-
-                    }
-
+                    databaseHelper.updateContacts(user);
                 });
             }).start();
 

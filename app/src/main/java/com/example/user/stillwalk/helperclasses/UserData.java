@@ -52,7 +52,7 @@ public class UserData {
 
     public User getUserData(String username) {
 
-        String sql = "SELECT firstName,lastName,personal_info,age" +
+        String sql = "SELECT firstName,lastName,personal_info,age,blood_type" +
                 " FROM userdata WHERE username=?";
 
         try (Connection conn = DriverManager.getConnection(url, this.username, this.password);
@@ -69,8 +69,8 @@ public class UserData {
                 user.setLastName(resultSet.getString(2));
                 user.setPersonalInfo(resultSet.getString(3));
                 user.setAge(resultSet.getInt(4));
+                user.setBloodType(resultSet.getString(5));
                 user.setUsername(username);
-
                 return user;
             }
 
@@ -87,10 +87,11 @@ public class UserData {
         String personal_info = user.getPersonalInfo();
         int age = user.getAge();
         String username = user.getUsername();
-        Log.i("mytag",username);
+        String bloodType = user.getBloodType();
+
 
         String sqlScript = "UPDATE userdata\n" +
-                    "SET firstName = ?, lastName = ?, age=?, personal_info=?\n" +
+                    "SET firstName = ?, lastName = ?, age=?, personal_info=? , blood_type=? \n" +
                     "WHERE username=?";
 
 
@@ -102,7 +103,8 @@ public class UserData {
                 p.setString(2, lastName);
                 p.setInt(3,age);
                 p.setString(4, personal_info);
-                p.setString(5,username);
+                p.setString(5,bloodType);
+                p.setString(6,username);
 
 
                 int affectedRows = p.executeUpdate();

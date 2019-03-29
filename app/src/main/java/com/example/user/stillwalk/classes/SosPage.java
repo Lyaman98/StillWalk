@@ -45,7 +45,7 @@ public class SosPage extends AppCompatActivity {
         TextView bloodType = findViewById(R.id.bloodType);
         TextView sos = findViewById(R.id.sos_text);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"font/font.otf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(),"font/font3.otf");
         lastName.setTypeface(typeface);
         firstName.setTypeface(typeface);
         personalInfo.setTypeface(typeface);
@@ -94,16 +94,19 @@ public class SosPage extends AppCompatActivity {
         if (user != null) {
 
             if (user.getFirstName() != null) {
-                firstName.setText(firstName.getText()  + user.getFirstName());
+                firstName.setText(firstName.getText()  + user.getFirstName() );
                 lastName.setText(lastName.getText() + user.getLastName());
                 age.setText(age.getText() + String.valueOf(user.getAge()));
                 personalInfo.setText(personalInfo.getText() + user.getPersonalInfo());
             }
 
-            if (user.getContacts().size() > 0){
+            if (user.getContacts().get(0) != null){
                 contact1.setText(contact1.getText() + user.getContacts().get(0));
                 contact2.setText(contact2.getText() + user.getContacts().get(1));
 
+            }else {
+                contact1.setText("");
+                contact2.setText("");
             }
 
         }
