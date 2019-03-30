@@ -143,7 +143,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void onBackPressed(){
-
+        databaseHelper.close();
     }
 
 }

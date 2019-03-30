@@ -1,6 +1,10 @@
 package com.example.user.stillwalk.classes;
 
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
+import android.app.ApplicationErrorReport;
+import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
@@ -19,6 +23,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
@@ -75,16 +80,14 @@ public class MainPage extends AppCompatActivity {
             startActivity(new Intent(MainPage.this,LoginPage.class));
         });
 
-
         startService(new Intent(this, GetLocationService.class));
-
-
     }
 
     public void appInfo(View view){
         Intent intent = new Intent(this,StillWalkInfo.class);
         startActivity(intent);
     }
+
 
     @Override
     public void onBackPressed() {

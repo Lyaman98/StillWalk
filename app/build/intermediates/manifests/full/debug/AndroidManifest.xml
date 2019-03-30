@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.UNINSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <meta-data
         android:name="android.support.VERSION"
@@ -42,6 +43,14 @@
         <service
             android:name="com.example.user.stillwalk.helperclasses.GetLocationService"
             android:exported="false" />
+
+        <receiver
+            android:name="com.example.user.stillwalk.helperclasses.GeoServiceReceiver"
+            android:label="StartMyServiceAtBootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <activity android:name="com.example.user.stillwalk.classes.LoginPage" >
             <intent-filter>

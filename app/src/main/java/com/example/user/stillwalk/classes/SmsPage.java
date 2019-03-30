@@ -62,6 +62,7 @@ public class SmsPage extends AppCompatActivity {
     public static final String USERNAME_PREFERENCE = "LoginInfo";
     public SharedPreferences sharedPreferences;
     private boolean haveContacts = false;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +79,10 @@ public class SmsPage extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
         username = sharedPreferences.getString("usernameKey","");
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        databaseHelper = new DatabaseHelper(this);
         myLocation = new Location("");
-        user = databaseHelper.getUserByUsername(username);
 
+        user = databaseHelper.getUserByUsername(username);
 
         ArrayList<String> location = databaseHelper.getLocation(username);
 
@@ -100,7 +101,7 @@ public class SmsPage extends AppCompatActivity {
         getUser();
 
         Toast.makeText(this,
-                "Pay attention that every click of SOS button takes money from your phone",
+                "Pay attention that every click of SOS button sends SMS to contacts from 'Contacts' section",
                 Toast.LENGTH_LONG).show();
     }
 
@@ -208,21 +209,19 @@ public class SmsPage extends AppCompatActivity {
             }
 
 
-            if (sendMessage(user.getContacts().get(0), msg.toString())) {
-
-                Toast.makeText(SmsPage.this, "send successfully to contact1", Toast.LENGTH_SHORT).show();
-            }
-            if (sendMessage(user.getContacts().get(1), msg.toString())) {
-                Toast.makeText(SmsPage.this, "send successfully to contact2", Toast.LENGTH_SHORT).show();
-
-            } else {
+            if (sendMessage(user.getContacts().get(0), msg.toString()) ||
+                    sendMessage(user.getContacts().get(1), msg.toString())) {
+                Toast.makeText(SmsPage.this, "successfully sent", Toast.LENGTH_SHORT).show();
+            }else {
                 Toast.makeText(SmsPage.this, "error", Toast.LENGTH_SHORT).show();
 
             }
 
-            System.out.println(msg);
-            Intent sosPageIntent = new Intent(SmsPage.this,SosPage.class);
-            startActivity(sosPageIntent);
+            if (user.getFirstName() != null && user.getAge() != 0){
+                Intent sosPageIntent = new Intent(SmsPage.this,SosPage.class);
+                startActivity(sosPageIntent);
+            }
+
         }
     }
 
@@ -315,6 +314,8 @@ public class SmsPage extends AppCompatActivity {
 
 
     public void onBackPressed(){
+
+        databaseHelper.close();
         Intent intent = new Intent(this,MainPage.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);

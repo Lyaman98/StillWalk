@@ -84,5 +84,7 @@ public class Register extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(userName.getWindowToken(),0);
         inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
     }
-    public void onBackPressed(){}
+    public void onBackPressed(){
+
+    }
 }

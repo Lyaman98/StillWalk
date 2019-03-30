@@ -93,15 +93,13 @@ public class SosPage extends AppCompatActivity {
 
         if (user != null) {
 
-            if (user.getFirstName() != null) {
-                firstName.setText(firstName.getText()  + user.getFirstName() );
-                lastName.setText(lastName.getText() + user.getLastName());
-                age.setText(age.getText() + String.valueOf(user.getAge()));
-                personalInfo.setText(personalInfo.getText() + user.getPersonalInfo());
-                bloodType.setText(bloodType.getText() + user.getBloodType());
-            }
+            firstName.setText(firstName.getText()  + user.getFirstName() );
+            lastName.setText(lastName.getText() + user.getLastName());
+            age.setText(age.getText() + String.valueOf(user.getAge()));
+            personalInfo.setText(personalInfo.getText() + user.getPersonalInfo());
+            bloodType.setText(bloodType.getText() + user.getBloodType());
 
-            if (user.getContacts().get(0) != null){
+            if (user.getContacts().get(0) != null && !user.getContacts().get(0).equals("null")){
                 contact1.setText(contact1.getText() + user.getContacts().get(0));
                 contact2.setText(contact2.getText() + user.getContacts().get(1));
 
@@ -120,7 +118,7 @@ public class SosPage extends AppCompatActivity {
             timer.cancel();
 
         }
-
+        databaseHelper.close();
         Intent intent = new Intent( SosPage.this,MainPage.class);
         startActivity(intent);
     }

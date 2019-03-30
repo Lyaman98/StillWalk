@@ -174,6 +174,7 @@ public class PersonalDataPage extends AppCompatActivity {
         }
 
         public void onBackPressed(){
+            databaseHelper.close();
             Intent intent = new Intent(PersonalDataPage.this,MainPage.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);

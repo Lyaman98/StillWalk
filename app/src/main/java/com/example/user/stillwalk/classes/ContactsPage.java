@@ -123,6 +123,7 @@ public class ContactsPage extends AppCompatActivity {
 
     }
     public void onBackPressed(){
+        databaseHelper.close();
         Intent intent = new Intent(this,MainPage.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
