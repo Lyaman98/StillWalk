@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:text="StillWalk is created to help people with diseases or disabilities seek for emergency help in case of emergency situations and times of trouble when none is around." />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="@dimen/_290sdp"
+        android:textStyle="bold"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:layout_centerHorizontal="true"
+        android:text="The app gives people feasibility to send the exact location to close contacts by SMS." />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="In case of emergency the app shows the information about the user, so other people could learn more about the user." />
+
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_170sdp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="Instructions to use the app : " />
+
+
+    <TextView
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_200sdp"
+        android:layout_centerHorizontal="true"
+        android:text="1) Turn on the geolocation in your phone" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_240sdp"
+        android:layout_centerHorizontal="true"
+        android:text="1) Fill all fields in Personal Information section." />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_280sdp"
+        android:layout_centerHorizontal="true"
+        android:text="2) Then type two contacts to whom the message will be sent in Contacts section." />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_330sdp"
+        android:layout_centerHorizontal="true"
+        android:text="3) Finally, if the user will face with emergency situation press one of the buttons in SOS section." />
+
+    <TextView
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_390sdp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:text="But pay attention that every button click in SOS section will send SMS, so press them only in case of emergency."
+        />
+</RelativeLayout>

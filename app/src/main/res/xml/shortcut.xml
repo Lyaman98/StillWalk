@@ -1,0 +1,16 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="25">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/sos"
+        android:shortcutId="shortcut_name"
+        android:shortcutShortLabel="@string/sos">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.example.user.stillwalk.classes.SmsPage"
+            android:targetPackage="com.example.user.stillwalk">
+        </intent>
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
