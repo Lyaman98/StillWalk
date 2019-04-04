@@ -1,42 +1,27 @@
 package com.example.user.stillwalk.classes;
 
-import android.annotation.TargetApi;
-import android.app.ActivityManager;
-import android.app.ApplicationErrorReport;
-import android.app.Service;
-import android.content.Context;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
-import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.preference.PreferenceManager;
+import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
-import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.GetLocationService;
-import com.example.user.stillwalk.helperclasses.User;
-
-import java.util.Arrays;
 
 public class MainPage extends AppCompatActivity {
 
 
     public static final String MyPREFERENCES = "LoginInfo";
+    public static final String SHORTCUTP_REFERENCE = "ShortCutInfo";
     private SharedPreferences sharedPreferences;
+    private boolean isInstalled;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -48,48 +33,100 @@ public class MainPage extends AppCompatActivity {
         CardView contacts = findViewById(R.id.contacts);
         CardView sos = findViewById(R.id.sos);
         CardView signOut = findViewById(R.id.sign_out);
-        sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+
+        sharedPreferences = getSharedPreferences(SHORTCUTP_REFERENCE,MODE_PRIVATE);
+        isInstalled = sharedPreferences.getBoolean("isInstalled",false);
+
+
+        if (!isInstalled) {
+            createShortCut();
+            showPopup();
+        }
 
         personalInfo.setOnClickListener(v -> {
             Intent intent = new Intent(MainPage.this, PersonalDataPage.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         sos.setOnClickListener(v -> {
 
-                Intent intent = new Intent(MainPage.this, SmsPage.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            Intent intent = new Intent(MainPage.this, SmsPage.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         });
 
         contacts.setOnClickListener(v -> {
             Intent intent = new Intent(MainPage.this, ContactsPage.class);
             startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         signOut.setOnClickListener(v -> {
 
-            stopService(new Intent(this,GetLocationService.class));
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("usernameKey","");
+            new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.identification3)
+                    .setTitle("Log out")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("Yes", (dialogInterface, i) -> {
 
-            editor.apply();
-            startActivity(new Intent(MainPage.this,LoginPage.class));
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isInstalled",false);
+                        editor.apply();
+
+                        IntroPage.isShowed = true;
+                        stopService(new Intent(getApplicationContext(), GetLocationService.class));
+                        sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+                        editor = sharedPreferences.edit();
+                        editor.putString("usernameKey", "");
+
+                        editor.apply();
+                        startActivity(new Intent(MainPage.this, LoginPage.class));
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+
         });
 
         startService(new Intent(this, GetLocationService.class));
     }
 
-    public void appInfo(View view){
-        Intent intent = new Intent(this,StillWalkInfo.class);
+
+    public void appInfo(View view) {
+        Intent intent = new Intent(this, StillWalkInfo.class);
         startActivity(intent);
     }
 
 
     @Override
     public void onBackPressed() {
+    }
+
+    public void createShortCut(){
+
+            Intent shortCut = new Intent(getApplicationContext(), SmsPage.class);
+            shortCut.setAction(Intent.ACTION_MAIN);
+            Intent intent = new Intent();
+            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortCut);
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "SOS");
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.sos));
+            intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+            getApplicationContext().sendBroadcast(intent);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isInstalled",true);
+            editor.apply();
+
+    }
+
+    public void showPopup(){
+
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.attention)
+                .setMessage("Please click to learn more about the application, before you started to use it ")
+                .setTitle("Attention")
+                .setPositiveButton("OK",null)
+                .show();
     }
 }

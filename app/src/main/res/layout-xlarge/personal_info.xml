@@ -37,6 +37,8 @@
         android:layout_marginTop="@dimen/_100sdp"
         android:layout_marginStart="@dimen/_75sdp"
         android:background="@drawable/corner"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +55,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
             android:hint="First name"
-            android:inputType="textCapCharacters|textMultiLine" />
+            android:inputType="textMultiLine" />
 
         <EditText
 
@@ -64,7 +66,7 @@
             android:layout_marginBottom="@dimen/_15sdp"
             android:gravity="center"
             android:hint="Last name"
-            android:inputType="textCapCharacters|textMultiLine" />
+            android:inputType="textMultiLine" />
 
         <EditText
 
@@ -75,7 +77,7 @@
             android:layout_marginBottom="@dimen/_15sdp"
             android:gravity="center"
             android:hint="Personal information"
-            android:inputType="textCapCharacters|textMultiLine" />
+            android:inputType="textMultiLine" />
 
         <Spinner
             android:id="@+id/age"

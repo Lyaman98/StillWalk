@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="hideKeyboard">
-
     </FrameLayout>
 
     <LinearLayout
@@ -36,7 +35,9 @@
             android:drawableLeft="@drawable/identification2"
             android:gravity="center"
             android:hint="First name"
-            android:inputType="textCapCharacters|textMultiLine" />
+            android:cursorVisible="true"
+            android:inputType="textMultiLine"
+            android:textAllCaps="false" />
 
         <EditText
 
@@ -48,11 +49,12 @@
             android:drawableLeft="@drawable/identification3"
             android:gravity="center"
             android:hint="Last name"
-            android:inputType="textCapCharacters|textMultiLine" />
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp">
+
             <EditText
 
                 android:id="@+id/personal-info"
@@ -64,8 +66,7 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:gravity="center"
                 android:hint="Personal information"
-                android:inputType="textCapCharacters|textMultiLine"
-                />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
 
@@ -80,6 +81,7 @@
             android:layout_marginStart="@dimen/_10sdp"
 
             />
+
         <Spinner
             android:id="@+id/age"
             android:layout_width="@dimen/_130sdp"
@@ -96,8 +98,8 @@
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            />
+            android:layout_marginBottom="@dimen/_10sdp" />
+
         <Spinner
             android:id="@+id/bloodType"
             android:layout_width="@dimen/_130sdp"
@@ -140,7 +142,6 @@
             android:textSize="20dp" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

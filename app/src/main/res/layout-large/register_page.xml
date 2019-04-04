@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
 
@@ -51,6 +50,8 @@
         android:layout_height="306dp"
         android:background="@drawable/corner"
         android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/_55sdp"
         android:layout_marginTop="@dimen/_120sdp"
         tools:layout_editor_absoluteY="130dp">

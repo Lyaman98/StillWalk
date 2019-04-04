@@ -3,14 +3,11 @@ package com.example.user.stillwalk.classes;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -25,7 +22,8 @@ import com.example.user.stillwalk.helperclasses.UserData;
 
 public class LoginPage extends AppCompatActivity {
 
-//    private UserData userData = new UserData();
+    public static final String MyPREFERENCES = "LoginInfo";
+    //    private UserData userData = new UserData();
     private TextView signInText;
     private TextView signUpText;
     private UserData userData;
@@ -34,13 +32,12 @@ public class LoginPage extends AppCompatActivity {
     private Handler handler;
     private String usernameText;
     private Button login;
-    public static final String MyPREFERENCES = "LoginInfo" ;
     private SharedPreferences sharedPreferences;
     private DatabaseHelper databaseHelper;
 
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
@@ -49,10 +46,9 @@ public class LoginPage extends AppCompatActivity {
         login = findViewById(R.id.login);
         signInText = findViewById(R.id.sign_text);
         signUpText = findViewById(R.id.register);
-
         handler = new Handler();
         userData = new UserData();
-        sharedPreferences = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
 
         Typeface face;
 
@@ -62,88 +58,96 @@ public class LoginPage extends AppCompatActivity {
         signUpText.setTypeface(face);
         signUpText.setPaintFlags(signUpText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        if (!TextUtils.isEmpty(usernameText = sharedPreferences.getString("usernameKey",""))){
+        if (!TextUtils.isEmpty(usernameText = sharedPreferences.getString("usernameKey", ""))) {
+
             Intent intent = new Intent(this, MainPage.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("username", usernameText);
             this.startActivity(intent);
-        }
+        } else {
 
+            if (!IntroPage.isShowed) {
 
-    }
-
-
-    public void registerClick(View view){
-
-        startActivity(new Intent(LoginPage.this,Register.class));
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-
-    }
-    public void loginClick(View view){
-
-            String usernameText = username.getText().toString();
-            String passwordText = password.getText().toString();
-
-            if (!TextUtils.isEmpty(usernameText) && !TextUtils.isEmpty(passwordText)) {
-
-
-                new Thread(() -> {
-
-
-                    boolean check = userData.checkUser(usernameText, HashingUtils.hashPassowrd(passwordText));
-
-                    handler.post(()->{
-
-                        if (check) {
-                            Intent intent = new Intent(this, MainPage.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.putExtra("username", usernameText);
-                            databaseHelper = new DatabaseHelper(this);
-                            databaseHelper.insertUsername(usernameText);
-
-
-                            saveDataToInternalStorage();
-                            this.startActivity(intent);
-                        } else {
-                            Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-
-                }).start();
-
-
-            } else {
-                Toast.makeText(LoginPage.this, "Fill the empty boxes", Toast.LENGTH_LONG).show();
-
+                Intent intent = new Intent(this, IntroPage.class);
+                startActivity(intent);
             }
+        }
+    }
+
+
+    public void registerClick(View view) {
+
+        startActivity(new Intent(LoginPage.this, Register.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }
+
+    public void loginClick(View view) {
+
+        String usernameText = username.getText().toString();
+        String passwordText = password.getText().toString();
+
+        if (!TextUtils.isEmpty(usernameText) && !TextUtils.isEmpty(passwordText)) {
+
+
+            new Thread(() -> {
+
+
+                boolean check = userData.checkUser(usernameText, HashingUtils.hashPassowrd(passwordText));
+
+                handler.post(() -> {
+
+                    if (check) {
+                        Intent intent = new Intent(this, MainPage.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("username", usernameText);
+                        databaseHelper = new DatabaseHelper(this);
+                        databaseHelper.insertUsername(usernameText);
+
+
+                        saveDataToInternalStorage();
+                        this.startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+            }).start();
+
+
+        } else {
+            Toast.makeText(LoginPage.this, "Fill the empty boxes", Toast.LENGTH_LONG).show();
 
         }
-    public void saveDataToInternalStorage(){
+
+    }
+
+    public void saveDataToInternalStorage() {
 
 
         String usernameKey = username.getText().toString();
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("usernameKey",usernameKey);
+        editor.putString("usernameKey", usernameKey);
 
         editor.apply();
 
     }
 
-    public void hideKeyboard(View view){
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         assert inputMethodManager != null;
-        inputMethodManager.hideSoftInputFromWindow(login.getWindowToken(),0);
-        inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(),0);
-
+        inputMethodManager.hideSoftInputFromWindow(login.getWindowToken(), 0);
+        inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(), 0);
 
 
     }
 
-    public void onBackPressed(){
-        databaseHelper.close();
+    public void onBackPressed() {
     }
+
+
 
 }

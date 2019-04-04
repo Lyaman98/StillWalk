@@ -1,7 +1,6 @@
 package com.example.user.stillwalk.classes;
 
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -20,10 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,9 +32,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,7 +70,7 @@ public class SmsPage extends AppCompatActivity {
         loadingText = findViewById(R.id.loading_textView);
 
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
-        username = sharedPreferences.getString("usernameKey","");
+        username = sharedPreferences.getString("usernameKey", "");
         databaseHelper = new DatabaseHelper(this);
         myLocation = new Location("");
 
@@ -86,9 +78,9 @@ public class SmsPage extends AppCompatActivity {
 
         ArrayList<String> location = databaseHelper.getLocation(username);
 
-        if (location.get(0) == null && location.get(1) == null){
+        if (location.get(0) == null && location.get(1) == null) {
             checkLocation();
-        }else {
+        } else {
             myLocation.setLatitude(Double.valueOf(location.get(0)));
             myLocation.setLongitude(Double.valueOf(location.get(1)));
             showButtons();
@@ -96,15 +88,14 @@ public class SmsPage extends AppCompatActivity {
         }
 
         userData = new UserData();
-        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE,MODE_PRIVATE);
-        username = sharedPreferences.getString("usernameKey","");
+        sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
+        username = sharedPreferences.getString("usernameKey", "");
         getUser();
 
         Toast.makeText(this,
-                "Pay attention that every click of SOS button sends SMS to contacts from 'Contacts' section",
+                "Every click of SOS button sends SMS to saved contacts",
                 Toast.LENGTH_LONG).show();
     }
-
 
 
     private void checkLocation() {
@@ -114,7 +105,7 @@ public class SmsPage extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 myLocation = location;
-                if (haveContacts){
+                if (haveContacts) {
                     showButtons();
                 }
 
@@ -138,15 +129,14 @@ public class SmsPage extends AppCompatActivity {
 
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {
-                Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.ACCESS_FINE_LOCATION,
         };
 
-       if(!hasPermissions(this, PERMISSIONS)){
+        if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
-        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.SEND_SMS)){
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.SEND_SMS)) {
 
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
@@ -193,13 +183,12 @@ public class SmsPage extends AppCompatActivity {
                 String googleMaps = "https://www.google.com/maps/place/";
                 msg.append(new URL(googleMaps + myLocation.getLatitude() + "," + myLocation.getLongitude()));
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-                List<Address> addressList = geocoder.getFromLocation(myLocation.getLatitude(),myLocation.getLongitude(),1);
+                List<Address> addressList = geocoder.getFromLocation(myLocation.getLatitude(), myLocation.getLongitude(), 1);
 
-                if (addressList != null && addressList.size() > 0){
+                if (addressList != null && addressList.size() > 0) {
                     msg.append(" , ");
                     msg.append(addressList.get(0).getAddressLine(0));
                 }
-
 
 
             } catch (MalformedURLException e) {
@@ -212,13 +201,13 @@ public class SmsPage extends AppCompatActivity {
             if (sendMessage(user.getContacts().get(0), msg.toString()) ||
                     sendMessage(user.getContacts().get(1), msg.toString())) {
                 Toast.makeText(SmsPage.this, "successfully sent", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 Toast.makeText(SmsPage.this, "error", Toast.LENGTH_SHORT).show();
 
             }
 
-            if (user.getFirstName() != null && user.getAge() != 0){
-                Intent sosPageIntent = new Intent(SmsPage.this,SosPage.class);
+            if (user.getFirstName() != null) {
+                Intent sosPageIntent = new Intent(SmsPage.this, SosPage.class);
                 startActivity(sosPageIntent);
             }
 
@@ -230,14 +219,14 @@ public class SmsPage extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(phoneNumber) && !TextUtils.isEmpty(message)) {
 
-            if (checkPermission(Manifest.permission.SEND_SMS) && checkPermission(Manifest.permission.READ_PHONE_STATE)) {
+            if (checkPermission(Manifest.permission.SEND_SMS)) {
 
                 SmsManager smsManager = SmsManager.getDefault();
                 ArrayList<String> msgList = smsManager.divideMessage(message);
 
-                smsManager.sendMultipartTextMessage(phoneNumber, null,msgList, null, null);
+                smsManager.sendMultipartTextMessage(phoneNumber, null, msgList, null, null);
 
-             return true;
+                return true;
             } else {
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
 
@@ -278,9 +267,9 @@ public class SmsPage extends AppCompatActivity {
 
     }
 
-    private void showButtons(){
+    private void showButtons() {
 
-        if (user.getContacts() != null){
+        if (user.getContacts() != null) {
             progressBar.setVisibility(View.INVISIBLE);
             loadingText.setVisibility(View.INVISIBLE);
             otherReasonB.setVisibility(View.VISIBLE);
@@ -295,12 +284,12 @@ public class SmsPage extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        for (String permission : permissions){
+        for (String permission : permissions) {
 
-            if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION) && requestCode == 1){
-                    if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                        locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
-                    }
+            if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION) && requestCode == 1) {
+                if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
+                }
                 break;
             }
         }
@@ -313,12 +302,12 @@ public class SmsPage extends AppCompatActivity {
     }
 
 
-    public void onBackPressed(){
+    public void onBackPressed() {
 
         databaseHelper.close();
-        Intent intent = new Intent(this,MainPage.class);
+        Intent intent = new Intent(this, MainPage.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
     }
 }

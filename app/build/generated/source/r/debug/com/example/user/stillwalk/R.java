@@ -1826,7 +1826,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
@@ -3780,49 +3780,51 @@ public final class R {
     public static final int abc_textfield_search_default_mtrl_alpha=0x7f060051;
     public static final int abc_textfield_search_material=0x7f060052;
     public static final int abc_vector_test=0x7f060053;
-    public static final int background_with_shadow=0x7f060054;
-    public static final int background_with_shadow2=0x7f060055;
-    public static final int button_background=0x7f060056;
-    public static final int card=0x7f060057;
-    public static final int contact=0x7f060058;
-    public static final int contact1=0x7f060059;
-    public static final int contact2=0x7f06005a;
-    public static final int conversation=0x7f06005b;
-    public static final int corner=0x7f06005c;
-    public static final int dizzy=0x7f06005d;
-    public static final int exit=0x7f06005e;
-    public static final int headache=0x7f06005f;
-    public static final int heartbeat=0x7f060060;
-    public static final int help=0x7f060061;
-    public static final int hospital=0x7f060062;
-    public static final int ic_launcher_background=0x7f060063;
-    public static final int ic_launcher_foreground=0x7f060064;
-    public static final int icon=0x7f060065;
-    public static final int identification=0x7f060066;
-    public static final int identification2=0x7f060067;
-    public static final int identification3=0x7f060068;
-    public static final int info=0x7f060069;
-    public static final int lock=0x7f06006a;
-    public static final int mail=0x7f06006b;
-    public static final int notification_action_background=0x7f06006c;
-    public static final int notification_bg=0x7f06006d;
-    public static final int notification_bg_low=0x7f06006e;
-    public static final int notification_bg_low_normal=0x7f06006f;
-    public static final int notification_bg_low_pressed=0x7f060070;
-    public static final int notification_bg_normal=0x7f060071;
-    public static final int notification_bg_normal_pressed=0x7f060072;
-    public static final int notification_icon_background=0x7f060073;
-    public static final int notification_template_icon_bg=0x7f060074;
-    public static final int notification_template_icon_low_bg=0x7f060075;
-    public static final int notification_tile_bg=0x7f060076;
-    public static final int notify_panel_notification_icon_bg=0x7f060077;
-    public static final int phone=0x7f060078;
-    public static final int question=0x7f060079;
-    public static final int signup=0x7f06007a;
-    public static final int sos=0x7f06007b;
-    public static final int sosbackground=0x7f06007c;
-    public static final int tooltip_frame_dark=0x7f06007d;
-    public static final int tooltip_frame_light=0x7f06007e;
+    public static final int attention=0x7f060054;
+    public static final int background_with_shadow=0x7f060055;
+    public static final int background_with_shadow2=0x7f060056;
+    public static final int button_background=0x7f060057;
+    public static final int card=0x7f060058;
+    public static final int contact=0x7f060059;
+    public static final int contact1=0x7f06005a;
+    public static final int contact2=0x7f06005b;
+    public static final int conversation=0x7f06005c;
+    public static final int corner=0x7f06005d;
+    public static final int dizzy=0x7f06005e;
+    public static final int exit=0x7f06005f;
+    public static final int headache=0x7f060060;
+    public static final int heartbeat=0x7f060061;
+    public static final int help=0x7f060062;
+    public static final int hospital=0x7f060063;
+    public static final int ic_launcher_background=0x7f060064;
+    public static final int ic_launcher_foreground=0x7f060065;
+    public static final int icon=0x7f060066;
+    public static final int identification=0x7f060067;
+    public static final int identification2=0x7f060068;
+    public static final int identification3=0x7f060069;
+    public static final int info=0x7f06006a;
+    public static final int lock=0x7f06006b;
+    public static final int mail=0x7f06006c;
+    public static final int notification_action_background=0x7f06006d;
+    public static final int notification_bg=0x7f06006e;
+    public static final int notification_bg_low=0x7f06006f;
+    public static final int notification_bg_low_normal=0x7f060070;
+    public static final int notification_bg_low_pressed=0x7f060071;
+    public static final int notification_bg_normal=0x7f060072;
+    public static final int notification_bg_normal_pressed=0x7f060073;
+    public static final int notification_icon_background=0x7f060074;
+    public static final int notification_template_icon_bg=0x7f060075;
+    public static final int notification_template_icon_low_bg=0x7f060076;
+    public static final int notification_tile_bg=0x7f060077;
+    public static final int notify_panel_notification_icon_bg=0x7f060078;
+    public static final int phone=0x7f060079;
+    public static final int question=0x7f06007a;
+    public static final int signup=0x7f06007b;
+    public static final int sos=0x7f06007c;
+    public static final int sosbackground=0x7f06007d;
+    public static final int stillwalk=0x7f06007e;
+    public static final int tooltip_frame_dark=0x7f06007f;
+    public static final int tooltip_frame_light=0x7f060080;
   }
   public static final class id {
     public static final int ALT=0x7f070000;
@@ -4052,22 +4054,23 @@ public final class R {
     public static final int appinfo=0x7f09001c;
     public static final int contacts_page=0x7f09001d;
     public static final int dp_example=0x7f09001e;
-    public static final int login_page=0x7f09001f;
-    public static final int notification_action=0x7f090020;
-    public static final int notification_action_tombstone=0x7f090021;
-    public static final int notification_template_custom_big=0x7f090022;
-    public static final int notification_template_icon_group=0x7f090023;
-    public static final int notification_template_part_chronometer=0x7f090024;
-    public static final int notification_template_part_time=0x7f090025;
-    public static final int personal_info=0x7f090026;
-    public static final int register_page=0x7f090027;
-    public static final int sdp_example=0x7f090028;
-    public static final int select_dialog_item_material=0x7f090029;
-    public static final int select_dialog_multichoice_material=0x7f09002a;
-    public static final int select_dialog_singlechoice_material=0x7f09002b;
-    public static final int send_sms=0x7f09002c;
-    public static final int sos_page=0x7f09002d;
-    public static final int support_simple_spinner_dropdown_item=0x7f09002e;
+    public static final int intro=0x7f09001f;
+    public static final int login_page=0x7f090020;
+    public static final int notification_action=0x7f090021;
+    public static final int notification_action_tombstone=0x7f090022;
+    public static final int notification_template_custom_big=0x7f090023;
+    public static final int notification_template_icon_group=0x7f090024;
+    public static final int notification_template_part_chronometer=0x7f090025;
+    public static final int notification_template_part_time=0x7f090026;
+    public static final int personal_info=0x7f090027;
+    public static final int register_page=0x7f090028;
+    public static final int sdp_example=0x7f090029;
+    public static final int select_dialog_item_material=0x7f09002a;
+    public static final int select_dialog_multichoice_material=0x7f09002b;
+    public static final int select_dialog_singlechoice_material=0x7f09002c;
+    public static final int send_sms=0x7f09002d;
+    public static final int sos_page=0x7f09002e;
+    public static final int support_simple_spinner_dropdown_item=0x7f09002f;
   }
   public static final class mipmap {
     public static final int ic_launcher=0x7f0a0000;
@@ -4110,8 +4113,8 @@ public final class R {
     public static final int app_name=0x7f0c001d;
     public static final int firstName=0x7f0c001e;
     public static final int search_menu_title=0x7f0c001f;
-    public static final int status_bar_notification_info_overflow=0x7f0c0020;
-    public static final int textview=0x7f0c0021;
+    public static final int sos=0x7f0c0020;
+    public static final int status_bar_notification_info_overflow=0x7f0c0021;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0d0000;
@@ -8772,7 +8775,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
@@ -13572,6 +13575,6 @@ public final class R {
     public static final int ViewStubCompat_android_inflatedId=2;
   }
   public static final class xml {
-    public static final int shortcuts=0x7f0f0000;
+    public static final int shortcut=0x7f0f0000;
   }
 }

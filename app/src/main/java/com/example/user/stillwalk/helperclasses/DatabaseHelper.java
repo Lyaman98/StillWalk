@@ -132,14 +132,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("update  " + TABLE_NAME + " set " +
-                COL_4 + " = '" + user.getFirstName() + "'," +
-                COL_5 + " = '" + user.getLastName() + "'," +
-                COL_6 + " = '" + user.getPersonalInfo() + "'," +
-                COL_3 + " = '" + user.getAge() + "' ," +
-                COL_1 + " ='"  +  user.getBloodType() + "' " +
-                "where username = '" + user.getUsername() + "'");
+        if (user.getFirstName() != null) {
 
+            db.execSQL("update  " + TABLE_NAME + " set " +
+                    COL_4 + " = '" + user.getFirstName() + "'," +
+                    COL_5 + " = '" + user.getLastName() + "'," +
+                    COL_6 + " = '" + user.getPersonalInfo() + "'," +
+                    COL_3 + " = '" + user.getAge() + "' ," +
+                    COL_1 + " ='" + user.getBloodType() + "' " +
+                    "where username = '" + user.getUsername() + "'");
+        }
 
     }
 
@@ -147,11 +149,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("update  " + TABLE_NAME + " set " +
-                COL_7 + " = '" + user.getContacts().get(0) + "'," +
-                COL_8 + " = '" + user.getContacts().get(1) + "'," +
-                COL_9 + " = '" + user.getMessage() + "' " +
-                "where username = '" + user.getUsername() + "'");
+
+        if(user.getContacts().get(0) != null) {
+
+            db.execSQL("update  " + TABLE_NAME + " set " +
+                    COL_7 + " = '" + user.getContacts().get(0) + "'," +
+                    COL_8 + " = '" + user.getContacts().get(1) + "'," +
+                    COL_9 + " = '" + user.getMessage() + "' " +
+                    "where username = '" + user.getUsername() + "'");
+        }
 
     }
 

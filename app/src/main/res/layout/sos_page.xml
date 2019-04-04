@@ -6,107 +6,116 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerInParent="true"
     android:layout_width="match_parent"
+    android:background="@color/redtransparent"
+
     android:layout_height="match_parent">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/redtransparent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/sos_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SOS"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="50dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/lastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:text="Last Name : "
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/sos_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="SOS"
+                android:textColor="@color/white"
+                android:textSize="50dp" />
 
-        <TextView
-            android:id="@+id/firstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:text="First Name : "
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/lastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:text="Last Name : "
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="25dp" />
 
-
-        <TextView
-            android:id="@+id/age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:text="Age : "
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:textStyle="bold"
+                android:text="First Name : "
+                android:textColor="@color/white"
+                android:textSize="25dp" />
 
 
-        <TextView
-            android:id="@+id/bloodType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:text="Blood Type : "
-
-            android:textSize="25dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_120sdp">
-
-        <TextView
-            android:id="@+id/personal-info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:text="Information : "
-            android:textSize="25dp" />
-
-    </LinearLayout>
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:text="Age : "
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
 
 
-        <TextView
-            android:id="@+id/contact1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:text="Contact : "
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/bloodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:text="Blood Type : "
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/contact2"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/white"
-            android:text="Contact : "
-            android:textSize="25dp" />
+            <TextView
+                android:id="@+id/personal-info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:text="Information : "
+                android:letterSpacing="0.1"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
 
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/contact1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:text="Contact : "
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/contact2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="20dp"
+                android:text="Contact : "
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 </RelativeLayout>
