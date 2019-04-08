@@ -15,12 +15,13 @@ import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
 import com.example.user.stillwalk.helperclasses.Validation;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 
 public class Register extends AppCompatActivity {
 
-    private UserData userData;
-    private Handler handler;
     private TextView userName;
     private TextView password;
 
@@ -39,8 +40,6 @@ public class Register extends AppCompatActivity {
         sign_in.setTypeface(typeface);
         sign_in.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
-        userData = new UserData();
-        handler = new Handler();
 
     }
 
@@ -57,17 +56,17 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Password must be more than 5 characters", Toast.LENGTH_LONG).show();
             return;
         }
-        new Thread(() -> {
-            boolean check = userData.registerUser(username, HashingUtils.hashPassowrd(pass));
-            handler.post(() -> {
-                if (check) {
-                    Toast.makeText(this, "User registered", Toast.LENGTH_LONG).show();
 
-                } else {
-                    Toast.makeText(this, "User already exists", Toast.LENGTH_LONG).show();
-                }
-            });
-        }).start();
+        ParseUser parseUser = new ParseUser();
+        parseUser.setUsername(username);
+        parseUser.setPassword(pass);
+        parseUser.signUpInBackground(e -> {
+            if(e != null){
+                Toast.makeText(getApplicationContext(),"User registered successfully",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(getApplicationContext(),"User already exists",Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

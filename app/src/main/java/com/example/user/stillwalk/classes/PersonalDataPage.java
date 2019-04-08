@@ -18,8 +18,16 @@ import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
+import com.parse.FindCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PersonalDataPage extends AppCompatActivity {
@@ -30,14 +38,10 @@ public class PersonalDataPage extends AppCompatActivity {
     private EditText personal_info;
     private Spinner age;
     private Spinner bloodType;
-
-    private UserData userData = new UserData();
     private User user;
-    private Handler handler;
     DatabaseHelper databaseHelper;
     private SharedPreferences usernamePreference;
     private ArrayList<String> bloodTypes;
-
 
     String username;
 
@@ -54,48 +58,52 @@ public class PersonalDataPage extends AppCompatActivity {
         personal_info = findViewById(R.id.personal_info);
         age = findViewById(R.id.age);
         bloodType = findViewById(R.id.bloodType);
-        handler = new Handler();
         databaseHelper = new DatabaseHelper(this);
-
-
         usernamePreference = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         user = databaseHelper.getUserByUsername(usernamePreference.getString("usernameKey", ""));
         username = user.getUsername();
 
-        Toast.makeText(this,usernamePreference.getString("usernameKey", "") + "", Toast.LENGTH_SHORT).show();
-
         setAgeList();
         setBloodTypeList();
 
-        if (user != null && user.getUsername() != null && user.getLastName() != null) {
+        if (user == null || user.getUsername() == null || user.getLastName() == null) {
 
-            firstName.setText(user.getFirstName());
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("UserData");
+            query.whereEqualTo("username",ParseUser.getCurrentUser().getUsername());
+            query.setLimit(1);
 
-            lastName.setText(user.getLastName());
-            age.setSelection(user.getAge() - 5);
-            personal_info.setText(user.getPersonalInfo());
-            bloodType.setSelection(bloodTypes.indexOf(user.getBloodType()));
+            query.findInBackground((objects, e) -> {
+                if (e == null){
 
-        } else {
+                    if (objects.size() > 0){
 
-            new Thread(() -> {
-
-
-                user = userData.getUserData(username);
-
-                handler.post(() -> {
-
-                    if (user.getFirstName() != null) {
-                        firstName.setText(user.getFirstName());
-                        lastName.setText(user.getLastName());
-                        age.setSelection(user.getAge() - 5);
-                        personal_info.setText(user.getPersonalInfo());
-                        bloodType.setSelection(bloodTypes.indexOf(user.getBloodType()));
+                        ParseObject object = objects.get(0);
+                        String firstNameString = object.getString("firstName");
+                        String lastNameString = object.getString("lastName");
+                        int ageInt = object.getInt("age") - 5;
+                        String personalInfo = object.getString("personalInfo");
+                        String bloodTypeString = object.getString("bloodType");
+                        user = new User(username, ageInt, firstNameString,lastNameString,personalInfo,bloodTypeString);
                         databaseHelper.updatePersonalData(user);
+
+                        setFields(user);
                     }
-                });
-            }).start();
+                }
+            });
+        }else {
+            setFields(user);
         }
+
+
+    }
+
+    private void setFields(User user){
+
+        firstName.setText(user.getFirstName());
+        lastName.setText(user.getLastName());
+        age.setSelection(user.getAge() - 5);
+        personal_info.setText(user.getPersonalInfo());
+        bloodType.setSelection(bloodTypes.indexOf(user.getBloodType()));
     }
 
     public void saveUserData(View view) {
@@ -110,20 +118,38 @@ public class PersonalDataPage extends AppCompatActivity {
                 !TextUtils.isEmpty(personalInfoString) && ageInt != 0) {
 
 
-            user.setFirstName(firstNameString);
-            user.setLastName(lastNameString);
-            user.setPersonalInfo(personalInfoString);
-            user.setAge(ageInt);
-            user.setBloodType(bloodTypeValue);
 
-            new Thread(() -> {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("UserData");
+            query.whereEqualTo("username",ParseUser.getCurrentUser().getUsername());
+            query.setLimit(1);
 
-                userData.addUserData(user);
-                handler.post(() -> {
+            query.findInBackground((objects, e) -> {
+                if (e == null){
+
+                    ParseObject userdata;
+
+                    if (objects.size() > 0){
+
+                        userdata = objects.get(0);
+
+                    }else {
+                        userdata = new ParseObject("UserData");
+                    }
+                    userdata.put("firstName",firstNameString);
+                    userdata.put("lastName",lastNameString);
+                    userdata.put("personalInfo",personalInfoString);
+                    userdata.put("age", ageInt);
+                    userdata.put("bloodType",bloodTypeValue);
+                    userdata.put("username",username);
+                    userdata.saveInBackground();
+                    user = new User(username,ageInt,firstNameString,lastNameString,personalInfoString,bloodTypeValue);
                     databaseHelper.updatePersonalData(user);
-                    Toast.makeText(this, "Data is saved", Toast.LENGTH_SHORT).show();
-                });
-            }).start();
+
+                    Toast.makeText(this,"Data is saved",Toast.LENGTH_LONG).show();
+
+                }
+            });
+
 
         } else {
             Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();

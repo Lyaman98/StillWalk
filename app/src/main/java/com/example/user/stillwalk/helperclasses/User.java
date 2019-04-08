@@ -25,6 +25,16 @@ public class User {
         this.username = username;
         this.bloodType = bloodType;
     }
+    public User(String username, int age, String firstName, String lastName, String personalInfo,String bloodType){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.personalInfo = personalInfo;
+        this.username = username;
+        this.bloodType = bloodType;
+
+    }
+
 
     public User(){}
 

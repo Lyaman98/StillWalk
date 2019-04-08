@@ -9,11 +9,13 @@ import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.GetLocationService;
+import com.parse.ParseUser;
 
 public class MainPage extends AppCompatActivity {
 
@@ -37,6 +39,7 @@ public class MainPage extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHORTCUTP_REFERENCE,MODE_PRIVATE);
         isInstalled = sharedPreferences.getBoolean("isInstalled",false);
 
+        Log.i("Username " , ParseUser.getCurrentUser().getUsername());
 
         if (!isInstalled) {
             createShortCut();

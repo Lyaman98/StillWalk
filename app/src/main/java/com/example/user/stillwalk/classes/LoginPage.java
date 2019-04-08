@@ -19,6 +19,9 @@ import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.HashingUtils;
 import com.example.user.stillwalk.helperclasses.UserData;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -26,10 +29,8 @@ public class LoginPage extends AppCompatActivity {
     //    private UserData userData = new UserData();
     private TextView signInText;
     private TextView signUpText;
-    private UserData userData;
     private EditText username;
     private EditText password;
-    private Handler handler;
     private String usernameText;
     private Button login;
     private SharedPreferences sharedPreferences;
@@ -46,8 +47,7 @@ public class LoginPage extends AppCompatActivity {
         login = findViewById(R.id.login);
         signInText = findViewById(R.id.sign_text);
         signUpText = findViewById(R.id.register);
-        handler = new Handler();
-        userData = new UserData();
+        databaseHelper = new DatabaseHelper(this);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
 
         Typeface face;
@@ -89,32 +89,19 @@ public class LoginPage extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(usernameText) && !TextUtils.isEmpty(passwordText)) {
 
+            ParseUser.logInInBackground(usernameText, passwordText, (user, e) -> {
+                if (user != null){
+                    Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("username", usernameText);
+                    databaseHelper.insertUsername(usernameText);
 
-            new Thread(() -> {
-
-
-                boolean check = userData.checkUser(usernameText, HashingUtils.hashPassowrd(passwordText));
-
-                handler.post(() -> {
-
-                    if (check) {
-                        Intent intent = new Intent(this, MainPage.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("username", usernameText);
-                        databaseHelper = new DatabaseHelper(this);
-                        databaseHelper.insertUsername(usernameText);
-
-
-                        saveDataToInternalStorage();
-                        this.startActivity(intent);
-                    } else {
-                        Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-
-            }).start();
-
+                    saveDataToInternalStorage();
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
+                }
+            });
 
         } else {
             Toast.makeText(LoginPage.this, "Fill the empty boxes", Toast.LENGTH_LONG).show();

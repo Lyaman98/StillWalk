@@ -16,14 +16,19 @@ import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ContactsPage extends AppCompatActivity {
 
-    private UserData userData;
     private User user;
-    private Handler handler;
     private EditText phoneNumber1;
     private EditText phoneNumber2;
     private EditText message;
@@ -42,8 +47,6 @@ public class ContactsPage extends AppCompatActivity {
         phoneNumber1 = findViewById(R.id.phone1_id);
         phoneNumber2 = findViewById(R.id.phone2_id);
         message = findViewById(R.id.messsage_id);
-        userData = new UserData();
-        handler = new Handler(Looper.getMainLooper());
         databaseHelper = new DatabaseHelper(this);
 
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
@@ -52,31 +55,43 @@ public class ContactsPage extends AppCompatActivity {
         user = databaseHelper.getUserByUsername(username);
 
         if (user != null && user.getUsername() != null && user.getContacts().get(0) != null) {
-
-            phoneNumber1.setText(user.getContacts().get(0));
-            phoneNumber2.setText(user.getContacts().get(1));
-            message.setText(user.getMessage());
-
-
+            setFields(user);
         } else {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("UserData");
+            query.whereEqualTo("username",ParseUser.getCurrentUser().getUsername());
+            query.setLimit(1);
 
-            new Thread(() -> {
-                user = userData.getContacts(username);
+            query.findInBackground((objects, e) -> {
+                if (e == null) {
 
-                handler.post(() -> {
+                    if (objects.size() > 0) {
+                        ParseObject object = objects.get(0);
 
-                    ArrayList<String> contacts = user.getContacts();
-                    phoneNumber1.setText(contacts.get(0));
-                    phoneNumber2.setText(contacts.get(1));
-                    message.setText(user.getMessage());
+                        String contact1 = object.getString("contact1");
+                        String contact2 = object.getString("contact1");
+                        String messageString = object.getString("message");
 
-                    databaseHelper.updateContacts(user);
+                        ArrayList<String> contacts = new ArrayList<>();
+                        contacts.add(contact1);
+                        contacts.add(contact2);
 
-                });
+                        user.setContacts(contacts);
+                        user.setMessage(messageString);
 
-            }).start();
+                        databaseHelper.updateContacts(user);
 
+                        setFields(user);
+
+                    }
+                }
+            });
         }
+    }
+
+    private void setFields(User user){
+        phoneNumber1.setText(user.getContacts().get(0));
+        phoneNumber2.setText(user.getContacts().get(1));
+        message.setText(user.getMessage());
     }
 
     public void saveContacts(View view) {
@@ -94,15 +109,25 @@ public class ContactsPage extends AppCompatActivity {
             user.setContacts(contacts);
             user.setMessage(messageString);
 
-            new Thread(() -> {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("UserData");
+            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+            query.setLimit(1);
 
-                userData.addContacts(user);
+            query.findInBackground((objects, e) -> {
+                if (e == null) {
+                    if (objects.size() > 0) {
 
-                handler.post(() -> {
-                    databaseHelper.updateContacts(user);
-                    Toast.makeText(this, "Data is saved", Toast.LENGTH_LONG).show();
-                });
-            }).start();
+                        ParseObject userdata = objects.get(0);
+                        userdata.put("contact1",contact1);
+                        userdata.put("contact2",contact2);
+                        userdata.put("message",messageString);
+                        userdata.saveInBackground();
+
+                        databaseHelper.updateContacts(user);
+                        Toast.makeText(this, "Data is saved", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
         } else {
             Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_LONG).show();

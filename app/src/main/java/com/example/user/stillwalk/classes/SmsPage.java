@@ -27,6 +27,9 @@ import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
 import com.example.user.stillwalk.helperclasses.UserData;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -39,7 +42,6 @@ import java.util.Locale;
 
 public class SmsPage extends AppCompatActivity {
 
-    private UserData userData;
     private User user;
     private CardView otherReasonB;
     private CardView tensionB;
@@ -87,7 +89,6 @@ public class SmsPage extends AppCompatActivity {
 
         }
 
-        userData = new UserData();
         sharedPreferences = getSharedPreferences(USERNAME_PREFERENCE, MODE_PRIVATE);
         username = sharedPreferences.getString("usernameKey", "");
         getUser();
@@ -105,6 +106,7 @@ public class SmsPage extends AppCompatActivity {
             @Override
             public void onLocationChanged(Location location) {
                 myLocation = location;
+
                 if (haveContacts) {
                     showButtons();
                 }
@@ -206,7 +208,7 @@ public class SmsPage extends AppCompatActivity {
 
             }
 
-            if (user.getFirstName() != null) {
+            if (user.getFirstName() != null && user.getMessage() != null) {
                 Intent sosPageIntent = new Intent(SmsPage.this, SosPage.class);
                 startActivity(sosPageIntent);
             }
@@ -254,14 +256,32 @@ public class SmsPage extends AppCompatActivity {
 
 
         } else {
-            new Thread(() -> {
 
-                if (userData.getContacts(username) != null) {
-                    user = userData.getContacts(username);
-                    haveContacts = true;
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("UserData");
+            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+            query.setLimit(1);
 
+            query.findInBackground((objects, e) -> {
+                if (e == null) {
+
+                    if (objects.size() > 0) {
+
+                        ParseObject parseObject = objects.get(0);
+
+                        User user = new User();
+                        ArrayList<String> contacts = new ArrayList<>();
+
+                        contacts.add(parseObject.getString("contact1"));
+                        contacts.add(parseObject.getString("contact2"));
+
+                        user.setContacts(contacts);
+                        user.setMessage(parseObject.getString("message"));
+                        user.setUsername(username);
+                        haveContacts = true;
+                    }
                 }
-            }).start();
+            });
+
         }
         return user;
 
