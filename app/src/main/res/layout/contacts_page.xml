@@ -94,6 +94,7 @@
             android:drawableLeft="@drawable/conversation"
             android:gravity="center"
             android:hint="Enter your message here"
+            android:maxLength="20"
             android:inputType="textMultiLine" />
 
         <Button
