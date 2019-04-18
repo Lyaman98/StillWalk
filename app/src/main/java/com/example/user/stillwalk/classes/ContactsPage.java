@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -53,6 +54,20 @@ public class ContactsPage extends AppCompatActivity {
         username = sharedPreferences.getString("usernameKey", "");
 
         user = databaseHelper.getUserByUsername(username);
+
+
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Contacts");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(view -> {
+            databaseHelper.close();
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+        });
 
         if (user != null && user.getUsername() != null && user.getContacts().get(0) != null) {
             setFields(user);
@@ -136,6 +151,9 @@ public class ContactsPage extends AppCompatActivity {
     }
 
 
+    public void onBackPressed() {
+    }
+
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         assert inputMethodManager != null;
@@ -143,14 +161,6 @@ public class ContactsPage extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(phoneNumber2.getWindowToken(), 0);
         inputMethodManager.hideSoftInputFromWindow(message.getWindowToken(), 0);
 
-
-    }
-
-    public void onBackPressed() {
-        databaseHelper.close();
-        Intent intent = new Intent(this, MainPage.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
     }
 

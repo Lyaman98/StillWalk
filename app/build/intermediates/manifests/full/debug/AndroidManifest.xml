@@ -31,7 +31,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <activity android:name="com.example.user.stillwalk.classes.SosPage" />
         <activity android:name="com.example.user.stillwalk.classes.PersonalDataPage" />
         <activity android:name="com.example.user.stillwalk.classes.ContactsPage" />
@@ -40,7 +40,6 @@
             android:exported="true" />
         <activity android:name="com.example.user.stillwalk.classes.Register" />
         <activity android:name="com.example.user.stillwalk.classes.MainPage" />
-        <activity android:name="com.example.user.stillwalk.classes.IntroPage" />
         <activity android:name="com.example.user.stillwalk.classes.StillWalkInfo" />
 
         <service

@@ -1,29 +1,28 @@
 package com.example.user.stillwalk.classes;
 
 import android.content.Intent;
-import android.graphics.Paint;
-import android.graphics.Typeface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
-import com.example.user.stillwalk.helperclasses.HashingUtils;
-import com.example.user.stillwalk.helperclasses.UserData;
+import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.Validation;
-import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 
 public class Register extends AppCompatActivity {
 
     private TextView userName;
     private TextView password;
+    private DatabaseHelper databaseHelper;
+    private SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "LoginInfo";
 
 
     @Override
@@ -32,14 +31,21 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.register_page);
         userName = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        TextView sign_text = findViewById(R.id.sign_text);
-        TextView sign_in = findViewById(R.id.sign_in);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "font/font.otf");
-        sign_text.setTypeface(typeface);
-        sign_in.setTypeface(typeface);
-        sign_in.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        databaseHelper = new DatabaseHelper(this);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
@@ -61,8 +67,21 @@ public class Register extends AppCompatActivity {
         parseUser.setUsername(username);
         parseUser.setPassword(pass);
         parseUser.signUpInBackground(e -> {
-            if(e != null){
+            if (e == null) {
                 Toast.makeText(getApplicationContext(),"User registered successfully",Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("username", username);
+                databaseHelper.insertUsername(username);
+                saveDataToInternalStorage(username);
+
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException exception) {
+                    exception.printStackTrace();
+                }
+                startActivity(intent);
             }else {
                 Toast.makeText(getApplicationContext(),"User already exists",Toast.LENGTH_LONG).show();
             }
@@ -87,4 +106,16 @@ public class Register extends AppCompatActivity {
     public void onBackPressed() {
 
     }
+
+    public void saveDataToInternalStorage(String usernameKey) {
+
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("usernameKey", usernameKey);
+
+        editor.apply();
+
+    }
+
 }

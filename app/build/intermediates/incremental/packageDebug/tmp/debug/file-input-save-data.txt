@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Apr 08 13:46:32 AZT 2019
+#Thu Apr 18 19:26:54 AZT 2019
 1.base=/Users/lyaman/Desktop/StillWalkApp/app/build/intermediates/assets/debug
 2.path=font/font.otf
 0.baseType=DIRECTORY

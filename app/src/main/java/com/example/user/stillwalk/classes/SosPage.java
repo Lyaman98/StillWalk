@@ -107,6 +107,7 @@ public class SosPage extends AppCompatActivity {
                 timer.cancel();
 
             }
+            SmsPage.isSosEnabled = false;
             databaseHelper.close();
             Intent intent = new Intent(SosPage.this, MainPage.class);
             startActivity(intent);
@@ -128,6 +129,7 @@ public class SosPage extends AppCompatActivity {
                         timer.cancel();
 
                     }
+                    SmsPage.isSosEnabled = false;
                     databaseHelper.close();
                     Intent intent = new Intent(SosPage.this, MainPage.class);
                     startActivity(intent);

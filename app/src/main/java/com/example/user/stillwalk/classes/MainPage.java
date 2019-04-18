@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -39,7 +40,10 @@ public class MainPage extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHORTCUTP_REFERENCE,MODE_PRIVATE);
         isInstalled = sharedPreferences.getBoolean("isInstalled",false);
 
-        Log.i("Username " , ParseUser.getCurrentUser().getUsername());
+
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Still Walking");
 
         if (!isInstalled) {
             createShortCut();
@@ -74,17 +78,18 @@ public class MainPage extends AppCompatActivity {
                     .setMessage("Are you sure you want to log out?")
                     .setPositiveButton("Yes", (dialogInterface, i) -> {
 
+                        ParseUser.logOut();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isInstalled",false);
                         editor.apply();
 
-                        IntroPage.isShowed = true;
                         stopService(new Intent(getApplicationContext(), GetLocationService.class));
                         sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
                         editor = sharedPreferences.edit();
                         editor.putString("usernameKey", "");
-
                         editor.apply();
+
+
                         startActivity(new Intent(MainPage.this, LoginPage.class));
                     })
                     .setNegativeButton("No", null)
@@ -104,6 +109,11 @@ public class MainPage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
     }
 
     public void createShortCut(){
@@ -121,12 +131,13 @@ public class MainPage extends AppCompatActivity {
             editor.putBoolean("isInstalled",true);
             editor.apply();
 
+
+
     }
 
     public void showPopup(){
 
         new AlertDialog.Builder(this)
-                .setIcon(R.drawable.attention)
                 .setMessage("Please click to learn more about the application, before you started to use it ")
                 .setTitle("Attention")
                 .setPositiveButton("OK",null)

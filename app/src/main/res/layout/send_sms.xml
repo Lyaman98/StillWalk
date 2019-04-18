@@ -5,23 +5,10 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/background_with_shadow">
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="120dp"
-            android:layout_weight="1"
-            android:text="STILL WALK"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

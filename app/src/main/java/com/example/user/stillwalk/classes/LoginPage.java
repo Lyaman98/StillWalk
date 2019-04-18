@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,16 +26,13 @@ import com.parse.ParseUser;
 
 public class LoginPage extends AppCompatActivity {
 
-    public static final String MyPREFERENCES = "LoginInfo";
     //    private UserData userData = new UserData();
-    private TextView signInText;
-    private TextView signUpText;
+    private Button login;
     private EditText username;
     private EditText password;
-    private String usernameText;
-    private Button login;
-    private SharedPreferences sharedPreferences;
     private DatabaseHelper databaseHelper;
+    private SharedPreferences sharedPreferences;
+    public static final String MyPREFERENCES = "LoginInfo";
 
 
     @Override
@@ -45,35 +43,26 @@ public class LoginPage extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
-        signInText = findViewById(R.id.sign_text);
-        signUpText = findViewById(R.id.register);
         databaseHelper = new DatabaseHelper(this);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
 
-        Typeface face;
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Login");
 
-        face = Typeface.createFromAsset(getAssets(), "font/font.otf");
-
-        signInText.setTypeface(face);
-        signUpText.setTypeface(face);
-        signUpText.setPaintFlags(signUpText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
+        String usernameText;
         if (!TextUtils.isEmpty(usernameText = sharedPreferences.getString("usernameKey", ""))) {
 
             Intent intent = new Intent(this, MainPage.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("username", usernameText);
             this.startActivity(intent);
-        } else {
-
-            if (!IntroPage.isShowed) {
-
-                Intent intent = new Intent(this, IntroPage.class);
-                startActivity(intent);
-            }
         }
     }
 
+    public void signInClick(View view){
+        startActivity(new Intent(this,Register.class));
+    }
 
     public void registerClick(View view) {
 
@@ -133,6 +122,11 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void onBackPressed() {
+
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 
 

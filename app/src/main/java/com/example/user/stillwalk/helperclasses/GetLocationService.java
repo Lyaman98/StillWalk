@@ -21,7 +21,6 @@ import android.widget.Toast;
 public class GetLocationService extends Service {
 
 
-    public Context context = this;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private DatabaseHelper databaseHelper;

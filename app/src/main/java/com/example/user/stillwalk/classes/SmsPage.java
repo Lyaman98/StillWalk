@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -57,6 +58,8 @@ public class SmsPage extends AppCompatActivity {
     public SharedPreferences sharedPreferences;
     private boolean haveContacts = false;
     DatabaseHelper databaseHelper;
+    static boolean isSosEnabled;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,20 @@ public class SmsPage extends AppCompatActivity {
         username = sharedPreferences.getString("usernameKey", "");
         databaseHelper = new DatabaseHelper(this);
         myLocation = new Location("");
+
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Still Walking");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(view -> {
+            databaseHelper.close();
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+        });
+
 
         user = databaseHelper.getUserByUsername(username);
 
@@ -209,8 +226,11 @@ public class SmsPage extends AppCompatActivity {
             }
 
             if (user.getFirstName() != null && user.getMessage() != null) {
-                Intent sosPageIntent = new Intent(SmsPage.this, SosPage.class);
-                startActivity(sosPageIntent);
+                if (!isSosEnabled) {
+                    isSosEnabled = true;
+                    Intent sosPageIntent = new Intent(SmsPage.this, SosPage.class);
+                    startActivity(sosPageIntent);
+                }
             }
 
         }
@@ -321,13 +341,6 @@ public class SmsPage extends AppCompatActivity {
         return check == PackageManager.PERMISSION_GRANTED;
     }
 
-
     public void onBackPressed() {
-
-        databaseHelper.close();
-        Intent intent = new Intent(this, MainPage.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
     }
 }

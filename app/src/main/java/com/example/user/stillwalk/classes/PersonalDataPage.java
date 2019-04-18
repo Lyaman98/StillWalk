@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -62,6 +63,20 @@ public class PersonalDataPage extends AppCompatActivity {
         usernamePreference = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         user = databaseHelper.getUserByUsername(usernamePreference.getString("usernameKey", ""));
         username = user.getUsername();
+
+
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Personal Information");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(view -> {
+            databaseHelper.close();
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+        });
 
         setAgeList();
         setBloodTypeList();
@@ -194,13 +209,7 @@ public class PersonalDataPage extends AppCompatActivity {
 
 
     }
-
     public void onBackPressed() {
-        databaseHelper.close();
-        Intent intent = new Intent(PersonalDataPage.this, MainPage.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
     }
 
 }
