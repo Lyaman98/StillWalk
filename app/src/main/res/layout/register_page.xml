@@ -18,8 +18,8 @@
         layout="@layout/tool_bar"/>
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_below="@id/tool_bar"
         android:layout_centerHorizontal="true"
         android:background="@drawable/stillwalk"/>
@@ -28,8 +28,8 @@
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="@dimen/_240sdp"
-        android:layout_height="306dp"
-        android:layout_marginTop="@dimen/_130sdp"
+        android:layout_height="@dimen/_290sdp"
+        android:layout_marginTop="@dimen/_110sdp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/corner"
         android:orientation="vertical">
@@ -48,7 +48,6 @@
             android:layout_width="@dimen/_220sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
             android:drawableStart="@drawable/mail"
             android:hint="Email"
             app:met_floatingLabel="normal"
@@ -60,7 +59,6 @@
             android:layout_width="@dimen/_220sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
             android:drawableStart="@drawable/lock"
             android:hint="Password"
             app:met_floatingLabel="normal"

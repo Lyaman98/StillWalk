@@ -27,7 +27,6 @@ import android.widget.Toast;
 import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
 import com.example.user.stillwalk.helperclasses.User;
-import com.example.user.stillwalk.helperclasses.UserData;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -39,26 +38,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-//TODO : remove phone permission
 
 public class SmsPage extends AppCompatActivity {
 
     private User user;
-    private CardView otherReasonB;
-    private CardView tensionB;
-    private CardView dizzinessB;
-    private CardView hearAttackB;
-    public TextView loadingText;
-    public ProgressBar progressBar;
     private String username;
-    private LocationListener locationListener;
-    private LocationManager locationManager;
+    private CardView tensionB;
+    public TextView loadingText;
+    private CardView dizzinessB;
     private Location myLocation;
-    public static final String USERNAME_PREFERENCE = "LoginInfo";
-    public SharedPreferences sharedPreferences;
-    private boolean haveContacts = false;
-    DatabaseHelper databaseHelper;
     static boolean isSosEnabled;
+    private CardView hearAttackB;
+    DatabaseHelper databaseHelper;
+    private CardView otherReasonB;
+    public ProgressBar progressBar;
+    private boolean haveContacts = false;
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    public SharedPreferences sharedPreferences;
+    public static final String USERNAME_PREFERENCE = "LoginInfo";
 
 
     @Override

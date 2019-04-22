@@ -3,7 +3,6 @@ package com.example.user.stillwalk.classes;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,39 +11,35 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.user.stillwalk.R;
 import com.example.user.stillwalk.helperclasses.DatabaseHelper;
+import com.example.user.stillwalk.helperclasses.NetworkUtil;
 import com.example.user.stillwalk.helperclasses.User;
-import com.example.user.stillwalk.helperclasses.UserData;
-import com.parse.FindCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class PersonalDataPage extends AppCompatActivity {
 
-
-    private EditText firstName;
-    private EditText lastName;
-    private EditText personal_info;
-    private Spinner age;
-    private Spinner bloodType;
-    private User user;
-    DatabaseHelper databaseHelper;
-    private SharedPreferences usernamePreference;
-    private ArrayList<String> bloodTypes;
-
     String username;
+    private User user;
+    private Spinner age;
+    private EditText lastName;
+    private Spinner bloodType;
+    private EditText firstName;
+    DatabaseHelper databaseHelper;
+    private EditText personal_info;
+    private ProgressBar progressBar;
+    private ArrayList<String> bloodTypes;
+    private SharedPreferences usernamePreference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +53,13 @@ public class PersonalDataPage extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         personal_info = findViewById(R.id.personal_info);
         age = findViewById(R.id.age);
+        progressBar = findViewById(R.id.progressBar);
         bloodType = findViewById(R.id.bloodType);
         databaseHelper = new DatabaseHelper(this);
         usernamePreference = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         user = databaseHelper.getUserByUsername(usernamePreference.getString("usernameKey", ""));
         username = user.getUsername();
+        progressBar.setVisibility(View.VISIBLE);
 
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
@@ -81,39 +78,46 @@ public class PersonalDataPage extends AppCompatActivity {
         setAgeList();
         setBloodTypeList();
 
-        if (user == null || user.getUsername() == null || user.getLastName() == null) {
+        if (NetworkUtil.getConnectivityState(getApplicationContext())){
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("UserData");
-            query.whereEqualTo("username",ParseUser.getCurrentUser().getUsername());
+            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
             query.setLimit(1);
 
             query.findInBackground((objects, e) -> {
-                if (e == null){
 
-                    if (objects.size() > 0){
+                if (e == null) {
+
+                    if (objects.size() > 0) {
 
                         ParseObject object = objects.get(0);
                         String firstNameString = object.getString("firstName");
                         String lastNameString = object.getString("lastName");
-                        int ageInt = object.getInt("age") - 5;
+                        int ageInt = object.getInt("age");
                         String personalInfo = object.getString("personalInfo");
                         String bloodTypeString = object.getString("bloodType");
-                        user = new User(username, ageInt, firstNameString,lastNameString,personalInfo,bloodTypeString);
+                        user = new User(username, ageInt, firstNameString, lastNameString, personalInfo, bloodTypeString);
                         databaseHelper.updatePersonalData(user);
 
                         setFields(user);
                     }
+                }else {
+                    if (user != null && user.getUsername() != null && user.getLastName() != null ){
+                        setFields(user);
+                    }
                 }
             });
-        }else {
-            setFields(user);
         }
+        if (!NetworkUtil.getConnectivityState(getApplicationContext()) &&
+                user != null && user.getUsername() != null && user.getLastName() != null ){
+             setFields(user);
 
-
+        }
     }
 
     private void setFields(User user){
 
+        progressBar.setVisibility(View.INVISIBLE);
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         age.setSelection(user.getAge() - 5);

@@ -17,13 +17,14 @@ import com.example.user.stillwalk.helperclasses.User;
 
 public class SosPage extends AppCompatActivity {
 
+    String username;
+    private MediaPlayer mp;
+    private CountDownTimer timer;
+    private boolean isBackPressed;
+    private DatabaseHelper databaseHelper;
     private SharedPreferences sharedPreferences;
     public static final String USERNAME_PREFERENCES = "LoginInfo";
-    private MediaPlayer mp;
-    String username;
-    private boolean isBackPressed;
-    private CountDownTimer timer;
-    private DatabaseHelper databaseHelper;
+
 
 
     @Override

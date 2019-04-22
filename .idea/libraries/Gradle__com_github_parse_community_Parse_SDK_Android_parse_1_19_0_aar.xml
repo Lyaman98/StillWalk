@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.parse-community.Parse-SDK-Android:parse:1.19.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/parse-1.19.0.aar/ca1fb3218d07079383fe1115f207d877/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/parse-1.19.0.aar/ca1fb3218d07079383fe1115f207d877/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.parse-community.Parse-SDK-Android/parse/1.19.0/2e469b9e06eb34e069cb08885e91c0caeee1b340/parse-1.19.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
